@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* Main Styles */
+
+body {
+	font-family: Verdana, Helvetica, "sans-serif";
+	font-size: 11px;
+}
+
+.success {
+	background: #cbffa7;
+}
+
+.button {
+	color: #333;
+	background: url(/images/button.gif) ;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border: 1px solid #ccc;
+	padding: 4px 8px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.button:hover {
+	border: 1px solid #5d5d5d;
+}
+
+.button:active {
+	background: url(/images/button_active.gif) ;
+}
+
+#wrapper {
+	width: 900px;
+	margin: 0 auto;
+}

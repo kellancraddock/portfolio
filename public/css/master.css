@@ -1,18 +1,95 @@
 @charset "utf-8";
-/* Main Styles */
+
+/* !reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, button,
+table, caption, tbody, tfoot, thead, tr, th, td, col {
+	background: transparent no-repeat 0 0;
+	border: 0;
+	font-size: 100%;
+	margin: 0;
+	outline: none;
+	padding: 0;
+	vertical-align: baseline;
+	}
+ol, ul { list-style: none; }
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+table {	border-collapse: collapse; border-spacing: 0; width: 100%; }
+input, textarea { margin: 0; padding: 0; }
+em { font-style: italic; }
+object { display: block; }
+
+/* !Main Styles */
 
 body {
+	color: #9fa19d;
+	background: #080e0e url(/images/background.jpg) top center no-repeat;
 	font-family: Verdana, Helvetica, "sans-serif";
 	font-size: 11px;
+	margin: 0;
+	padding: 0;
 }
+
+/* !Callouts */
+
+.callouts {
+	background: url(/images/callout_bg.gif) repeat-x;
+}
+
+.callouts li p {
+	font-weight: bold;
+	line-height: 18px;
+}
+
+.callouts li h3 {
+	text-indent: -999px;
+	overflow: hidden;
+	height: 35px;
+}
+
+.callouts li.who h3 {
+	background: transparent url(/images/who.png) no-repeat;
+}
+
+	.callouts li.why h3 {
+		background: transparent url(/images/why.png) no-repeat;
+	}
+	
+	.callouts li.how h3 {
+		background: transparent url(/images/how.png) no-repeat;
+	}
+
+.callouts li {
+	background: transparent url(/images/callout_arrow.png) left 8px no-repeat;
+	border-left: 1px solid #ccc;
+	width: 27%;
+	float: left;
+	padding: 12px 3%;
+	padding-bottom: 24px;
+}
+
+.callouts li:first-child {
+	border: none;
+}
+
+/* !Alerts */
 
 .success {
 	background: #cbffa7;
 }
 
+/* !Button */
+
 .button {
 	color: #333;
-	background: url(/images/button.gif) ;
+	background: url(/images/button.gif);
 	-moz-border-radius: 15px;
 	-webkit-border-radius: 15px;
 	border: 1px solid #ccc;
@@ -26,10 +103,86 @@ body {
 }
 
 .button:active {
-	background: url(/images/button_active.gif) ;
+	background: url(/images/button_active.gif);
 }
 
 #wrapper {
-	width: 900px;
-	margin: 0 auto;
+	background: transparent url(/images/dropshaddow.png) center 90px no-repeat;
+	width: 1000px;
+	position: absolute;
+	top: 25px;
+	margin-left: -515px;
+	left: 50%;
+	padding: 0 15px;
+}
+
+#panel {
+	background: url(/images/panel.png) 34% 50% no-repeat;
+	overflow: hidden;
+	height: 482px;
+	margin-top: 25px;
+}
+
+.logo {
+	background: url(/images/logo.png) no-repeat;
+	text-indent: -999px;
+	width: 198px;
+	height: 82px;
+	margin-top: 15px;
+	float: left;
+}
+
+#main_container {
+	background: #fff;
+	clear: both;
+}
+
+/* !Navigation */
+
+.nav.main  {
+	background: transparent url(/images/trasparent_light.png);
+	width: 500px;
+	float: right;
+}
+
+.nav.main li {
+	width: 25%;
+}
+
+.nav.main li.active {
+	background: transparent url(/images/transparent_dark.png) repeat-x;
+}
+
+.nav.main li.active a {
+	color: #fff;
+	font-weight: bold;
+}
+
+.nav.main li a {
+	display: block;
+	color: #000;
+	padding: 8%;
+	text-align: center;
+	text-decoration: none;
+}
+
+.nav li {
+	float: left;
+}
+
+/* !clearfix */
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+/* IE6 */ 
+* html .clearfix {
+	height: 1%;
+}/* IE7 */
+*:first-child+html .clearfix {
+	min-height: 1px;
 }

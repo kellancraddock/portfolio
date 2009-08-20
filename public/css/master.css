@@ -73,6 +73,11 @@ body {
 	position: relative;
 }
 
+#gallery.work {
+	height: 300px;
+	overflow: hidden;
+}
+
 /* !Callouts */
 
 .callouts {
@@ -116,6 +121,29 @@ body {
 	float: left;
 	padding: 12px 3%;
 	padding-bottom: 24px;
+}
+
+/* !Callouts Work */
+
+.callouts.work li {
+	border-left: 1px solid #dadada;
+	width: 18%;
+	float: left;
+	padding: 12px 3%;
+	padding-bottom: 24px;
+}
+
+.callouts.work li h3 {
+	color: #8c8c8c;
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+.callouts.work li:first-child {
+	background: transparent url(/images/callout_arrow.png) left 8px no-repeat;
+}
+.callouts.work li:first-child h3 {
+	color: #b7b7b7;
+	font-size: 24px;
 }
 
 /* !Alerts */

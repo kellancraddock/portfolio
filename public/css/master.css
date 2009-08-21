@@ -82,14 +82,30 @@ body {
 
 .callouts {
 	border-top: 1px solid #dadada;
+	border-bottom: 1px solid #dadada;
 	background: url(/images/callout_bg.gif) repeat-x;
 }
+
+.callouts li {
+	min-height: 98px;
+}
+
+.callouts li ul.normal li {
+	border: none;
+	float: none;
+	padding: 0;
+	width: auto;
+	min-height: 0;
+}
+.callouts li ul.normal li:first-child {
+	background: none;
+}
+
+/* !Callouts Main */
 
 .callouts.main li:first-child {
 	border: none;
 }
-
-/* !Callouts Main */
 
 .callouts.main li p {
 	font-weight: bold;
@@ -138,9 +154,11 @@ body {
 	font-size: 14px;
 	margin-bottom: 5px;
 }
+
 .callouts.work li:first-child {
 	background: transparent url(/images/callout_arrow.png) left 8px no-repeat;
 }
+
 .callouts.work li:first-child h3 {
 	color: #b7b7b7;
 	font-size: 24px;
@@ -232,7 +250,6 @@ body {
 
 .nav.footer {
 	background: #fff;
-	border-top: 1px solid #dadada;
 	-moz-border-radius-bottomright: 10px;
 	-moz-border-radius-bottomleft: 10px;
 	-webkit-border-bottom-right-radius: 10px;
@@ -320,4 +337,32 @@ body {
 }/* IE7 */
 *:first-child+html .clearfix {
 	min-height: 1px;
+}
+
+/* !Thumbs */
+
+#thumbs {
+	clear: both;
+	padding: 20px;
+}
+
+#thumbs ul li {
+	background: url(/images/thumb_bg_active_03.gif) center -6px repeat-x;
+	border: 1px solid #d5d5d5;
+	float: left;
+	margin-left: 10px;
+	margin-bottom: 8px;
+	-moz-border-radius: 5px;
+}
+
+#thumbs ul li.active {
+	background: url(/images/thumb_bg_active_02.gif) bottom repeat-x;
+	border: none;
+}
+#thumbs ul li.active img {
+	background: url(/images/thumb_arrow_right.png) 0 12px no-repeat;
+}
+#thumbs ul li img {
+	padding: 10px;
+	width: 157px;
 }

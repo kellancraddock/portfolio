@@ -29,65 +29,131 @@ object { display: block; }
 /* !Main Styles */
 
 body {
-	color: #9fa19d;
-	background: #080e0e url(/images/background.jpg) top center no-repeat;
-	font-family: Verdana, Helvetica, "sans-serif";
+	color: #797c79;
+	background: #fff top center no-repeat;
+	font-family: Helvetica, Verdana, "sans-serif";
 	font-size: 11px;
 	margin: 0;
 	padding: 0;
 }
 
+p {
+	margin-bottom: 10px;
+}
+
+h4 {
+	color: #b9b9b9;
+	font-size: 24px;
+}
+
+dt {
+	border-bottom: 1px dotted #ccc;
+	font-weight: bold;
+	font-size: 14px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+h4.contact {
+	float: left;
+}
+
+h4.contact span {
+	display: block;
+	font-weight: normal;
+	font-size: 14px;
+}
+
 #wrapper {
-	background: transparent url(/images/dropshaddow.png) center 95px no-repeat;
+	background: transparent url(/images/dropshaddow_02.png) center 122px no-repeat;
 	width: 1000px;
 	position: absolute;
-	top: 25px;
+	top: 0;
 	margin-left: -515px;
 	left: 50%;
 	padding: 0 15px;
 }
 
 #panel {
-	background: url(/images/panel.png) 34% 50% no-repeat;
+	background: #7b91a0 url(/images/panel.gif) repeat-x;
 	overflow: hidden;
 	height: 482px;
-	margin-top: 25px;
+	margin-top: 15px;
 }
 
 .logo {
 	background: url(/images/logo.png) no-repeat;
 	text-indent: -999px;
-	width: 198px;
-	height: 82px;
-	margin-top: 15px;
+	width: 270px;
+	height: 132px;
 	float: left;
-	margin-bottom: 7px;
+	margin-left: -82px;
 }
 
 #main_container {
-	background: #fff;
 	clear: both;
 }
 
 #gallery {
 	position: relative;
+	height: 437px;
+	overflow: hidden;
 }
 
-#gallery.work {
+#gallery.secondary {
 	height: 300px;
 	overflow: hidden;
+}
+
+/* !Columns */
+
+.column {
+	border-left: 1px solid #ccc;
+	float: left;
+	padding: 1% 3%;
+}
+
+.columns {
+	background: #fff;
+	border-bottom: 1px solid #ccc;
+}
+
+.columns .column:first-child {
+	border-color: #fff;
+}
+
+.two_thirds {
+	width: 60%;
+}
+
+.one_third {
+	width: 27%;
+}
+
+.column.resume h4 {
+	float: left;
+}
+
+.column.resume dl {
+	clear: both;
+}
+
+.column.resume .button.pdf {
+	float: right;
 }
 
 /* !Callouts */
 
 .callouts {
-	border-top: 1px solid #dadada;
 	border-bottom: 1px solid #dadada;
-	background: url(/images/callout_bg.gif) repeat-x;
+	background: #eeeeee url(/images/callout_bg_02.gif) bottom repeat-x;
 }
 
 .callouts li {
 	min-height: 98px;
+	float: left;
+	padding: 1% 3%;
 }
 
 .callouts li ul.normal li {
@@ -101,36 +167,36 @@ body {
 	background: none;
 }
 
-/* !Callouts Main */
-
-.callouts.main li:first-child {
+.callouts.about li:first-child, .callouts.main li:first-child, .callouts.work li:first-child {
 	border: none;
 }
+
+/* !Callouts Main */
 
 .callouts.main li p {
 	font-weight: bold;
 	line-height: 18px;
 }
 
-.callouts.main li h3 {
+.callouts.main li h3, .callouts.about li h3, .callouts.contact li h3 {
 	text-indent: -999px;
 	overflow: hidden;
 	height: 35px;
 }
 
-.callouts.main li.who h3 {
+.callouts.main li.who h3, .callouts.about li.who h3 {
 	background: transparent url(/images/who.png) no-repeat;
 }
 
-	.callouts.main li.why h3 {
+	.callouts.main li.why h3, .callouts.about li.why h3 {
 		background: transparent url(/images/why.png) no-repeat;
 	}
 	
-	.callouts.main li.how h3 {
+	.callouts.main li.how h3, .callouts.about li.how h3 {
 		background: transparent url(/images/how.png) no-repeat;
 	}
 
-.callouts.main li {
+.callouts.main li, .callouts.about li {
 	background: transparent url(/images/callout_arrow.png) left 8px no-repeat;
 	border-left: 1px solid #dadada;
 	width: 27%;
@@ -164,6 +230,20 @@ body {
 	font-size: 24px;
 }
 
+/* !Callouts Contact */
+
+.callouts.contact li:first-child {
+	background: transparent url(/images/callout_arrow.png) left 8px no-repeat;
+}
+
+.callouts.contact li.contact h3 {
+	background: transparent url(/images/contact.png) no-repeat;
+}
+
+.callouts.contact li {
+	border-left: 1px solid #dadada;
+}
+
 /* !Alerts */
 
 .success {
@@ -174,76 +254,91 @@ body {
 
 .button {
 	color: #333;
-	background: url(/images/button.gif);
+	background: url(/images/button_bg_03.png);
 	-moz-border-radius: 15px;
 	-webkit-border-radius: 15px;
 	border: 1px solid #ccc;
+	border-bottom-color: #999;
+	border-right-color: #999;
+	border-bottom-width: 2px;
 	padding: 4px 8px;
 	text-decoration: none;
 	cursor: pointer;
+	display: block;
 }
 
 .button:hover {
-	border: 1px solid #5d5d5d;
+	border: 1px solid #999;
 }
 
 .button:active {
 	background: url(/images/button_active.gif);
 }
 
+/* !Button Contact */
+
+.nav.contact .button {
+	text-align: left;
+	padding: 13px 8px 12px 42px;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+}
+
+.button.twitter {
+	background: url(/images/twitter.png) 4px center no-repeat;
+}
+
+.button.facebook {
+	background: url(/images/facebook.png) 4px center no-repeat;
+}
+
+.button.email {
+	background: url(/images/email.png) 4px center no-repeat;
+}
+
 /* !Navigation */
 
 .nav.main  {
-	background: transparent url(/images/trasparent_light.png);
-	width: 500px;
+	width: 650px;
 	float: right;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	margin-top: 50px;
+	margin-top: 15px;
 
 }
 
 .nav.main li {
-	width: 25%;
+	background: transparent url(/images/nav_divider.png) top right no-repeat;
+	font-size: 16px;
+	width: 24%;
 }
 
 .nav.main li.active {
-	background: transparent url(/images/transparent_dark.png) repeat-x;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	background: #fff url(/images/nav_active.gif) bottom repeat-x;
+	border-bottom: 1px solid #c4c4c4;
+	border-left: 1px solid #fff;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
 }
 
 .nav.main li.active a {
-	color: #fff;
+	color: #1c2e3d;
 	font-weight: bold;
 }
 
 .nav.main li a {
 	display: block;
-	color: #000;
-	padding: 8%;
+	color: #fff;
+	padding: 4%;
 	text-align: center;
 	text-decoration: none;
+	text-shadow: 1px 1px 3px #333;
 }
 
 .nav li {
 	float: left;
-}
-
-/* !Sub Navigation */
-
-.nav.sub {
-	background: transparent url(/images/transparent_dark.png);
-	clear: both;
-	-moz-border-radius-topright: 10px;
-	-moz-border-radius-topleft: 10px;
-	-webkit-border-top-right-radius: 10px;
-	-webkit-border-top-left-radius: 10px;
-}
-
-.nav.sub li {
-	float: right;
-	padding: 5px;
 }
 
 /* !Footer Navigation */
@@ -264,10 +359,7 @@ body {
 /* !Gallery Navigation */
 
 .nav.gallery {
-	background: url(/images/controls_bg.gif) repeat-x;
 	padding: 5px;
-	-moz-border-radius-bottomleft: 10px;
-	-webkit-border-bottom-left-radius: 10px;
 }
 
 .nav.gallery li a {
@@ -293,21 +385,35 @@ body {
 	font-size: 14px;
 }
 
+/* !Contact Navigation */
+
+.nav.contact {
+	float: right;
+}
+
+.nav.contact li {
+	background: transparent url(/images/button_bg_03.png) repeat-x;
+	margin: 10px 10px 15px 0;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+}
+
 /* !GalleryControls */
 
-
+.controls_wrapper {
+	background: transparent url(/images/dropshaddow_top.png) center bottom no-repeat;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
 
 .gallery_controls.main {
-	background: transparent url(/images/transparent_white.png);
-	border: 1px solid #ccc;
+	background: #fff;
 	width: 33%;
-	position: absolute;
-	bottom: 40px;
-	right: 0;
-	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-topright: 10px;
 	-moz-border-radius-topleft: 10px;
 	-webkit-border-top-left-radius: 10px;
-	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
 }
 
 .gallery_controls.main h2, .gallery_controls.main p {
@@ -342,8 +448,10 @@ body {
 /* !Thumbs */
 
 #thumbs {
+	background: #fff;
 	clear: both;
-	padding: 20px;
+	margin-left: -10px;
+	padding-top: 10px;
 }
 
 #thumbs ul li {
@@ -364,5 +472,56 @@ body {
 }
 #thumbs ul li img {
 	padding: 10px;
-	width: 157px;
+	width: 170px;
+}
+
+/* !Forms */
+
+label {
+	border-top: 1px dotted #ccc;
+	display: block;
+	float: left;
+	clear: right;
+	padding: 5px 0;
+}
+
+fieldset {
+	border-top: 1px dotted #ccc;
+}
+
+legend {
+	font-weight: bold;
+	font-size: 18px;
+	padding-right: 10px;
+}
+
+input[type="text"], textarea {
+	background: transparent url(/images/input_bg.png) 0 -20px repeat-x;
+	border: 1px solid #ccc;
+	display: block;
+	margin-bottom: 10px;
+	float: right;
+	padding: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+input[type="textarea"] {
+	
+}
+
+button {
+	clear: both;
+	float: right;
+}
+
+/* !Contact Forms */
+
+.contact label {
+	width: 20%;
+}
+
+.contact input[type="text"], textarea {
+	background-color: #fff;
+	width: 75%;
 }

@@ -16,24 +16,50 @@
 </head>
 
 <body>
+	<div id="breadcrumbs_wrapper"><!-- --></div>
 	<div id="panel"><!-- --></div>
 	<div id="wrapper">
 		<h1 class="logo">Kellan Craddock</h1>
 		<!-- Main Navigation -->
 		<ul class="nav main clearfix">
-			<li class="active"><a href="/">Home</a></li>
-			<li><a href="/work">Work</a></li>
-			<li><a href="/about">About</a></li>
-			<li><a href="/contact">Contact</a></li>
+			<li <?= (isset($this->nav_home)) ? "class=\"{$this->nav_home}\"" : ''?>><a href="/">Home</a></li>
+			<li <?= (isset($this->nav_work)) ? "class=\"{$this->nav_work}\"" : ''?>><a href="/work">Work</a></li>
+			<li <?= (isset($this->nav_about)) ? "class=\"{$this->nav_about}\"" : ''?>><a href="/about">About</a></li>
+			<li <?= (isset($this->nav_contact)) ? "class=\"{$this->nav_contact}\"" : ''?>><a href="/contact">Contact</a></li>
 		</ul>
 		<!-- Main Content -->
 		<div id="main_container">
 			<?= $this->layout()->content ?>
 		</div>
 		<!-- Footer Navigation -->
-		<ul class="nav footer clearfix">
-			<li>Footer</li>
-		</ul>
+		<div class="columns clearfix">
+			<div class="column two_thirds">
+				<h4 class="contact">Let&rsquo;s talk!
+					<span>Ways to start the conversation ></span>
+				</h4>
+				<ul class="nav contact clearfix">
+					<li>
+						<a class="button email external" href="#">Contact Me</a>
+					</li>
+					<li>
+						<a class="button facebook external" href="#">Facebook</a>
+					</li>
+					<li>
+						<a class="button twitter external" href="#">Twitter</a>
+					</li>
+				</ul>
+			</div>
+			<div class="column one_third resume">
+				<h4>Resume</h4>
+				<a class="button pdf" href="#">Full PDF Resume</a>
+				<dl>
+					<dt>B.S. Web Design and Interactive Media</dt>
+					<dd><strong>October 2005 &ndash; September 2009</strong> Art Institute of Portland</dd>
+				</dl>
+				
+			</div>
+		</div>
+		
 	</div>
 </body>
 </html>

@@ -542,6 +542,7 @@ label {
 
 fieldset {
 	border-top: 1px dotted #ccc;
+	padding-top: 5px;
 }
 
 legend {
@@ -550,15 +551,15 @@ legend {
 	padding-right: 10px;
 }
 
-input[type="text"], textarea {
+input[type="text"], textarea, select {
 	background: transparent url(/images/input_bg.png) 0 -20px repeat-x;
 	border: 1px solid #ccc;
 	display: block;
 	margin-bottom: 10px;
-	float: right;
 	padding: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+	float: right;
 }
 
 input[type="textarea"] {
@@ -576,9 +577,13 @@ button {
 	width: 20%;
 }
 
-.contact input[type="text"], textarea {
+.contact input[type="text"], .contact textarea {
 	background-color: #fff;
 	width: 75%;
+}
+
+.contact button {
+	float: right;
 }
 
 /* !Breadcrumbs Wrapper */
@@ -586,4 +591,87 @@ button {
 #breadcrumbs_wrapper {
 	background: #fff;
 	height: 15px;
+}
+
+/* !Admin */
+
+#admin_container .columns {
+	background: none;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border: none;
+	margin: 0;
+}
+
+#admin_container {
+	background: #fff;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+#admin_container h2 {
+	color: #555;
+	font-size: 28px;
+	margin-bottom: 5px;
+}
+
+#admin_container legend {
+	font-weight: normal;
+}
+
+#login, #projects {
+	color: #777;
+	width: 100%;
+}
+
+#admin_container input[type="text"], #admin_container textarea {
+	width: 60%;
+}
+
+#active_projects h3, #inactive_projects h3, #admin_container .edit h3 {
+	border-bottom: 1px dotted #ccc;
+	color: #555;
+	font-size: 18px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	padding-bottom: 5px;
+}
+
+#active_projects li, #inactive_projects li {
+	color: #333;
+	background: #ccc;
+	border: 1px solid #999;
+	margin-bottom: 3px;
+	padding: 5px;
+}
+
+#active_projects li a, #inactive_projects li a {
+	border-left: 1px solid #777; 
+	color: #355b89;
+	float: right;
+	text-decoration: none;
+	padding-left: 35px;
+	margin-left: 20px;
+}
+
+#active_projects li a:hover, #inactive_projects li a:hover {
+	text-decoration: underline;
+}
+
+#active_projects li a.edit, #inactive_projects li a.edit {
+	background: transparent url(/images/wrench_orange.png) 25% 50% no-repeat;
+}
+
+#active_projects li a.delete, #inactive_projects li a.delete {
+	background: transparent url(/images/cross.png) 25% 50% no-repeat;
+}
+
+#active_projects li span, #inactive_projects li span {
+	float: left;
+}
+
+.column.edit .images img {
+	border: 1px solid #ccc;
+	width: 200px;
+	padding: 3px;
 }

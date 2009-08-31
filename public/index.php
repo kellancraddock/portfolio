@@ -37,7 +37,7 @@ $config = new Zend_Config(
 			'adapter' => 'Mysqli',
 			'params' => array(
 				'host' => 'localhost',
-				'dbname' => 'dbname',
+				'dbname' => 'portfolio',
 				'username' => 'root',
 				'password' => 'root',
 			)
@@ -66,6 +66,6 @@ $front = Zend_Controller_Front::getInstance();
 
 //Set Controllers
 $front->setControllerDirectory('../app/controllers');
-$front->throwExceptions(false);
+$front->throwExceptions(true);
 $front->dispatch();
 ?>

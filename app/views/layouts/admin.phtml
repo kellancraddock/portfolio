@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Kellan Craddock</title>
+	
+	<link type="text/css" href="/css/master.css" rel="stylesheet" />
+	
+	<script type="text/javascript" src="/javascript/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/jquery.pngFix.pack.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('body').pngFix(); 
+		});
+	</script>
+</head>
+
+<body>
+	<div id="breadcrumbs_wrapper"><!-- --></div>
+	<div id="panel"><!-- --></div>
+	<div id="wrapper">
+		<h1 class="logo">Kellan Craddock</h1>
+		<!-- Main Navigation -->
+		<ul class="nav main clearfix">
+			<li <?= (isset($this->nav_home)) ? "class=\"{$this->nav_home}\"" : ''?>><a href="/">Home</a></li>
+			<li <?= (isset($this->nav_work)) ? "class=\"{$this->nav_work}\"" : ''?>><a href="/work">Work</a></li>
+			<li <?= (isset($this->nav_about)) ? "class=\"{$this->nav_about}\"" : ''?>><a href="/about">About</a></li>
+			<li <?= (isset($this->nav_contact)) ? "class=\"{$this->nav_contact}\"" : ''?>><a href="/contact">Contact</a></li>
+		</ul>
+		<!-- Main Content -->
+		<div id="main_container">
+		<div id="admin_container">
+			<?= $this->layout()->content ?>
+		</div>
+		</div>
+		<!-- Footer Navigation -->
+		<div class="columns clearfix">
+			<div class="column two_thirds">
+				<h4 class="contact">Let&rsquo;s talk!
+					<span>Ways to start the conversation ></span>
+				</h4>
+				<ul class="nav contact clearfix">
+					<li>
+						<a class="button email external" href="#">Contact Me</a>
+					</li>
+					<li>
+						<a class="button facebook external" href="#">Facebook</a>
+					</li>
+					<li>
+						<a class="button twitter external" href="#">Twitter</a>
+					</li>
+				</ul>
+			</div>
+			<div class="column one_third resume">
+				<h4>Resume</h4>
+				<a class="button pdf" href="#">Full PDF Resume</a>
+				<dl>
+					<dt>B.S. Web Design and Interactive Media</dt>
+					<dd><strong>October 2005 &ndash; September 2009</strong> Art Institute of Portland</dd>
+				</dl>
+				
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>

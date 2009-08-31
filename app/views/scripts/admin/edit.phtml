@@ -1,0 +1,37 @@
+<div class="columns clearfix">
+	<div class="column one_third">
+		<h2>Site Administration</h2>
+		<form id="projects" action="/admin/update/id/<?= $this->project['id'] ?>" method="post">
+			<fieldset>
+				<legend>Edit: <?= $this->project['title'] ?></legend>
+					<label for="title">Project Title</label>
+					<input type="text" name="title" id="title" value="<?= $this->project['title'] ?>"/>
+					<label for="description">Description</label>
+					<textarea name="description" id="description"><?= $this->project['description'] ?></textarea>
+					<label for="status">Status</label>
+					<select id="status" name="status">
+						<option value="1" <?= ($this->project['is_active']) ? 'selected="selected"' : ''; ?>>active</option>
+						<option value="0" <?= (!$this->project['is_active']) ? 'selected="selected"' : ''; ?>>pending</option>
+					</select>
+					<button class="button" type="submit">Update</button>
+			</fieldset>
+			<a href="/admin/projects">Cancel</a>
+		</form>
+	</div>
+	<div class="column two_thirds edit">
+		<h3><?= $this->project['title'] ?> Images:</h3>
+		<div class="images">
+			<?php 
+				if (isset($this->project['images'])) {
+					foreach ($this->project['images'] as $image) {
+						echo "<img src=\"/images/{$image}\"/>";
+					}
+				} else {
+					echo '<img src="/images/default_image.png"/>';
+				}
+			
+			?>
+		</div>
+		<h3></h3>
+	</div>
+</div>

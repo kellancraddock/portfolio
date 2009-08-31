@@ -1,0 +1,44 @@
+<div class="columns clearfix">
+	<div class="column one_third">
+		<h2>Site Administration</h2>
+		<form id="projects" action="/admin/new" method="post">
+			<fieldset>
+				<legend>Add a Project</legend>
+					<label for="title">Project Title</label>
+					<input type="text" name="title" id="title" />
+					<label for="description">Description</label>
+					<textarea name="description" id="description"></textarea>
+					<label for="contributions">Contributions</label>
+					<input type="text" name="contributions" id="contributions" />
+					<button class="button" type="submit">Submit</button>
+			</fieldset>
+		</form>
+	</div>
+	<div class="column two_thirds">
+		<div id="active_projects">
+			<h3>Active Projects</h3>
+			<ul>
+				<?php
+				foreach ($this->projects as $project) {
+					if ($project['is_active']) {
+						echo "<li class=\"clearfix\"><span>{$project['title']}</span> <a class=\"delete\" href=\"/admin/delete/id/{$project['id']}\">delete</a><a href=\"/admin/edit/id/{$project['id']}\" class=\"edit\">edit</a></li>";
+					}
+				}
+				?>
+			</ul>
+		</div>
+		<div id="inactive_projects">
+			<h3>Pending Projects</h3>
+			<ul>
+			<?php
+			foreach ($this->projects as $project) {
+				if (!$project['is_active']) {
+					echo "<li class=\"clearfix\"><span>{$project['title']}</span> <a class=\"delete\" href=\"/admin/delete/id/{$project['id']}\">delete</a><a href=\"/admin/edit/id/{$project['id']}\" class=\"edit\">edit</a></li>";
+
+				}
+			}
+			?>
+			</ul>
+		</div>
+	</div>
+</div>

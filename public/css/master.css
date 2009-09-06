@@ -518,7 +518,7 @@ h4.contact span {
 
 #thumbs ul li.active {
 	background: url(/images/callout_bg_02.gif) bottom repeat-x;
-	border: none;
+	border: 1px solid #fff;
 }
 #thumbs ul li.active img {
 	background: url(/images/thumb_arrow_right.png) 0 12px no-repeat;
@@ -527,6 +527,7 @@ h4.contact span {
 #thumbs ul li img {
 	padding: 10px;
 	width: 157px;
+	height: 75px;
 	opacity: .4;
 }
 
@@ -551,7 +552,7 @@ legend {
 	padding-right: 10px;
 }
 
-input[type="text"], textarea, select {
+input[type="text"], input[type="file"], textarea, select {
 	background: transparent url(/images/input_bg.png) 0 -20px repeat-x;
 	border: 1px solid #ccc;
 	display: block;
@@ -584,6 +585,12 @@ button {
 
 .contact button {
 	float: right;
+}
+
+/* !Image Forms */
+
+form#images {
+	color: #555;
 }
 
 /* !Breadcrumbs Wrapper */
@@ -671,7 +678,40 @@ button {
 }
 
 .column.edit .images img {
+	width: 183px;
+	height: 100px;
+	overflow: hidden;
+}
+.column.edit .images .image {
+	background: #e0e0e0;
+	color: #555;
+	width: 183px;
 	border: 1px solid #ccc;
-	width: 200px;
-	padding: 3px;
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
+}
+
+.column.edit .images .image a {
+	float: right;
+}
+
+/* !Work */
+
+ul.project_views li img {
+	width: 40px;
+	height: 40px;
+}
+
+.callouts.work li ul.project_views li {
+	border: 1px solid #ccc;
+	padding: 4px;
+	width: auto;
+	margin-right: 5px;
+	min-height: 0;
+}
+
+.callouts.work li ul.project_views li:first-child {
+	background: none;
 }

@@ -3,13 +3,13 @@
 	{
 		private $table = "projects";
 		
-		function getOne($arguments)
+		function getOne($project_id)
 		{
 			//Connect to database
 			$db = $this->getDefaultAdapter();
 			
 			//Set arguments to select statement
-			$select = "SELECT * FROM $this->table WHERE id = '{$arguments[0]}'";
+			$select = "SELECT * FROM $this->table WHERE id = '{$project_id}'";
 		
 			//Select from table
 			return $db->fetchRow($select);
@@ -22,6 +22,18 @@
 			
 			//Set arguments to select statement
 			$select = "SELECT * FROM $this->table";
+		
+			//Select from table
+			return $db->fetchAssoc($select);
+		}
+		
+		function getActive()
+		{
+			//Connect to database
+			$db = $this->getDefaultAdapter();
+			
+			//Set arguments to select statement
+			$select = "SELECT * FROM $this->table WHERE is_active = '1'";
 		
 			//Select from table
 			return $db->fetchAssoc($select);
@@ -64,13 +76,13 @@
 			return $db->update($this->table, $insertArgs, $where);
 		}
 		
-		function deleteOne($arguments)
+		function deleteOne($project_id)
 		{
 			//Connect to database
 			$db = $this->getDefaultAdapter();
 		
 			//Set arguments to select statement
-			$delete = "id = '{$arguments[0]}'";
+			$delete = "id = '{$project_id}'";
 		
 			//Delete from table
 			return $db->delete($this->table, $delete);

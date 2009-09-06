@@ -19,12 +19,16 @@
 		</form>
 	</div>
 	<div class="column two_thirds edit">
-		<h3><?= $this->project['title'] ?> Images:</h3>
-		<div class="images">
+		<h3>"<?= $this->project['title'] ?>" Images:</h3>
+		<div class="images clearfix">
 			<?php 
 				if (isset($this->project['images'])) {
 					foreach ($this->project['images'] as $image) {
-						echo "<img src=\"/images/{$image}\"/>";
+						echo "<div class=\"image\">";
+						echo "<img src=\"/uploads/{$image['file_name']}\"/>";
+						echo "<p>{$image['type']}<a href=\"/image/delete/id/{$image['id']}/project/{$this->project['id']}\">Delete</a></p>";
+						echo "</div>";
+						
 					}
 				} else {
 					echo '<img src="/images/default_image.png"/>';
@@ -32,6 +36,25 @@
 			
 			?>
 		</div>
-		<h3></h3>
+		<h3>Add Images:</h3>
+		<form id="images" action="/image/upload/id/<?= $this->project['id'] ?>" method="post" enctype="multipart/form-data">
+			<fieldset>
+		        <legend>Large Images</legend>
+		        <label for="image1">Image 1</label>
+		        <input type="file" name="image1" class="image1" id="image1" <?= (isset($this->project['images']['image1'])) ? 'disabled = disabled' : ''?>/>
+		        
+		        <label for="image2">Image 2</label>
+		        <input type="file" name="image2" class="image2" id="image2" <?= (isset($this->project['images']['image2'])) ? 'disabled = disabled' : ''?>/>
+		        
+		        <label for="image2">Image 3</label>
+		        <input type="file" name="image3" class="image3" id="image3" <?= (isset($this->project['images']['image3'])) ? 'disabled = disabled' : ''?>/>
+		        
+		        <label for="image2">Image 4</label>
+		        <input type="file" name="image4" class="image4" id="image4" <?= (isset($this->project['images']['image4'])) ? 'disabled = disabled' : ''?>/>
+		        			
+		        <button class="button" type="submit">Update</button>
+		        
+			</fieldset>
+		</form>
 	</div>
 </div>

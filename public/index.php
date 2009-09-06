@@ -21,6 +21,7 @@ Zend_Loader::loadClass('Zend_View_Helper_Abstract');
 Zend_Loader::loadClass('Zend_View');
 Zend_Loader::loadClass('Zend_Session');
 Zend_Loader::loadClass('Zend_Session_Namespace');
+Zend_Loader::loadClass('Zend_File_Transfer_Adapter_Http');
 Zend_Loader::loadClass('Zend_Layout');
 
 //StartMVC

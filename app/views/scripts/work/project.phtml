@@ -1,0 +1,59 @@
+<!-- Gallery -->
+<div id="gallery" class="secondary">
+	<ul>
+		<li><?= "<img src=\"/uploads/{$this->project['view']}\" alt=\"image 1\" />"; ?></li>
+	</ul>
+	<div class="controls_wrapper"><!-- !Controlswrapper --></div>
+</div>
+<!-- Callouts -->
+<ul class="callouts work clearfix">
+	<li>
+		<strong>Project:</strong>
+		<h3><?= $this->project['title'] ?></h3>
+	</li>
+	<li>
+		<h3>About The Project</h3>
+		<p><?= $this->project['description'] ?></p>
+	</li>
+	<li>
+		<h3>Project Contributions</h3>
+		<ul class="normal">
+			<?php
+				foreach ($this->project['contributions'] as $contribution) {
+					echo "<li>{$contribution['contribution']}</li>";
+				}
+			?>
+		</ul>
+	</li>
+	<li>
+		<h3>Views</h3>
+		<ul class="project_views clearfix">
+		<?php
+			foreach ($this->project['images'] as $key => $image) {
+				echo "<li>";
+				echo "<a href=\"/work/project/id/{$this->project['id']}/view/{$image['id']}\">";
+				echo "<img src=\"/uploads/{$image['file_name']}\" alt=\"thumbnail\" />";
+				echo "</a>";
+				echo "</li>";
+			}
+		?>
+	</ul>
+	</li>
+</ul>
+<div id="thumbs">
+	<ul class="clearfix">
+	<?php
+		foreach ($this->thumbs as $key => $thumb) {
+			echo ($thumb['project_id'] == $this->project['id']) ? "<li class=\"active\">" : "<li>";
+			echo "<a href=\"/work/project/id/{$thumb['project_id']}\">";
+			if (isset($thumb['file_name'])) {
+				echo "<img src=\"/uploads/{$thumb['file_name']}\" alt=\"thumbnail\" />";
+			} else {
+				echo "<img src=\"/images/default_image.png\" alt=\"thumbnail\" />";
+			}
+			echo "</a>";
+			echo "</li>";
+		}
+	?>
+	</ul>
+</div>

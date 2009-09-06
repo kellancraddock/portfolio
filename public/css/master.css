@@ -529,6 +529,7 @@ h4.contact span {
 	width: 157px;
 	height: 75px;
 	opacity: .4;
+	vertical-align: bottom;
 }
 
 /* !Forms */
@@ -702,16 +703,33 @@ form#images {
 ul.project_views li img {
 	width: 40px;
 	height: 40px;
+	vertical-align: bottom;
 }
 
 .callouts.work li ul.project_views li {
-	border: 1px solid #ccc;
-	padding: 4px;
+	border: none;
+	padding: 0;
 	width: auto;
 	margin-right: 5px;
 	min-height: 0;
 }
+.callouts.work li ul.project_views li a {
+	border: 1px solid #999;
+	padding: 4px;
+	display: block;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+.callouts.work li ul.project_views li a:hover {
+	border-color: #444;
+}
 
 .callouts.work li ul.project_views li:first-child {
 	background: none;
+}
+
+.callouts.work li ul.project_views li.active a {
+	border:none;
+	background: #333333 url(/images/button_bg_04.png) repeat-x center top;
 }

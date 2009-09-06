@@ -30,7 +30,7 @@
 		<ul class="project_views clearfix">
 		<?php
 			foreach ($this->project['images'] as $key => $image) {
-				echo "<li>";
+				echo ($image['file_name'] == $this->project['view']) ? "<li class=\"active\">" : "<li>";
 				echo "<a href=\"/work/project/id/{$this->project['id']}/view/{$image['id']}\">";
 				echo "<img src=\"/uploads/{$image['file_name']}\" alt=\"thumbnail\" />";
 				echo "</a>";

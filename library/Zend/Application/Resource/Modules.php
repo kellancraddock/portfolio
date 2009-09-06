@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Modules.php 15523 2009-05-11 14:07:22Z matthew $
+ * @version    $Id: Modules.php 17730 2009-08-21 19:50:07Z matthew $
  */
 
 /**
@@ -26,7 +26,7 @@
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Application_Resource_Modules extends Zend_Application_Resource_ResourceAbstract
@@ -38,8 +38,8 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
 
     /**
      * Constructor
-     * 
-     * @param  mixed $options 
+     *
+     * @param  mixed $options
      * @return void
      */
     public function __construct($options = null)
@@ -62,22 +62,39 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
 
         $modules = $front->getControllerDirectory();
         $default = $front->getDefaultModule();
-        foreach (array_keys($modules) as $module) {
-            if ($module === $default) {
-                continue;
-            }
-
+        $curBootstrapClass = get_class($bootstrap);
+        foreach ($modules as $module => $moduleDirectory) {
             $bootstrapClass = $this->_formatModuleName($module) . '_Bootstrap';
-            if (!class_exists($bootstrapClass)) {
-                $bootstrapPath  = $front->getModuleDirectory($module) . '/Bootstrap.php';
+            if (!class_exists($bootstrapClass, false)) {
+                $bootstrapPath  = dirname($moduleDirectory) . '/Bootstrap.php';
                 if (file_exists($bootstrapPath)) {
+                    $eMsgTpl = 'Bootstrap file found for module "%s" but bootstrap class "%s" not found';
                     include_once $bootstrapPath;
-                    if (!class_exists($bootstrapClass, false)) {
-                        throw new Zend_Application_Resource_Exception('Bootstrap file found for module "' . $module . '" but bootstrap class "' . $bootstrapClass . '" not found');
+                    if (($default != $module)
+                        && !class_exists($bootstrapClass, false)
+                    ) {
+                        throw new Zend_Application_Resource_Exception(sprintf(
+                            $eMsgTpl, $module, $bootstrapClass
+                        ));
+                    } elseif ($default == $module) {
+                        if (!class_exists($bootstrapClass, false)) {
+                            $bootstrapClass = 'Bootstrap';
+                            if (!class_exists($bootstrapClass, false)) {
+                                throw new Zend_Application_Resource_Exception(sprintf(
+                                    $eMsgTpl, $module, $bootstrapClass
+                                ));
+                            }
+                        }
                     }
                 } else {
                     continue;
                 }
+            }
+
+            if ($bootstrapClass == $curBootstrapClass) {
+                // If the found bootstrap class matches the one calling this 
+                // resource, don't re-execute.
+                continue;
             }
 
             $moduleBootstrap = new $bootstrapClass($bootstrap);
@@ -90,7 +107,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
 
     /**
      * Get bootstraps that have been run
-     * 
+     *
      * @return ArrayObject
      */
     public function getExecutedBootstraps()
@@ -100,8 +117,8 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
 
     /**
      * Format a module name to the module class prefix
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return string
      */
     protected function _formatModuleName($name)

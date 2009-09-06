@@ -14,8 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Amf
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id: Introspector.php 16971 2009-07-22 18:05:45Z mikaelkael $
  */
 
 /** Zend_Amf_Parse_TypeLoader */
@@ -32,7 +33,7 @@ require_once 'Zend/Server/Reflection.php';
  *
  * @package    Zend_Amf
  * @subpackage Adobe
- * @copyright  Copyright (c) 2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Amf_Adobe_Introspector 
@@ -278,7 +279,7 @@ class Zend_Amf_Adobe_Introspector
             return 'Unknown';
         }
 
-        if (in_array($typename, array('string', 'object', 'Unknown', 'stdClass', 'array'))) {
+        if (in_array($typename, array('int', 'integer', 'bool', 'boolean', 'float', 'string', 'object', 'Unknown', 'stdClass', 'array'))) {
             return $typename;
         }
 

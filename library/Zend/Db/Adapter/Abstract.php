@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 15664 2009-05-21 12:59:47Z yoshida@zend.co.jp $
+ * @version    $Id: Abstract.php 17702 2009-08-20 23:54:16Z yoshida@zend.co.jp $
  */
 
 
@@ -37,7 +37,7 @@ require_once 'Zend/Db/Select.php';
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Db_Adapter_Abstract
@@ -208,6 +208,10 @@ abstract class Zend_Db_Adapter_Abstract
 
         if (!isset($config['charset'])) {
             $config['charset'] = null;
+        }
+
+        if (!isset($config['persistent'])) {
+            $config['persistent'] = false;
         }
 
         $this->_config = array_merge($this->_config, $config);
@@ -471,7 +475,7 @@ abstract class Zend_Db_Adapter_Abstract
     /**
      * Leave autocommit mode and begin a transaction.
      *
-     * @return bool True
+     * @return Zend_Db_Adapter_Abstract
      */
     public function beginTransaction()
     {
@@ -479,13 +483,13 @@ abstract class Zend_Db_Adapter_Abstract
         $q = $this->_profiler->queryStart('begin', Zend_Db_Profiler::TRANSACTION);
         $this->_beginTransaction();
         $this->_profiler->queryEnd($q);
-        return true;
+        return $this;
     }
 
     /**
      * Commit a transaction and return to autocommit mode.
      *
-     * @return bool True
+     * @return Zend_Db_Adapter_Abstract
      */
     public function commit()
     {
@@ -493,13 +497,13 @@ abstract class Zend_Db_Adapter_Abstract
         $q = $this->_profiler->queryStart('commit', Zend_Db_Profiler::TRANSACTION);
         $this->_commit();
         $this->_profiler->queryEnd($q);
-        return true;
+        return $this;
     }
 
     /**
      * Roll back a transaction and return to autocommit mode.
      *
-     * @return bool True
+     * @return Zend_Db_Adapter_Abstract
      */
     public function rollBack()
     {
@@ -507,7 +511,7 @@ abstract class Zend_Db_Adapter_Abstract
         $q = $this->_profiler->queryStart('rollback', Zend_Db_Profiler::TRANSACTION);
         $this->_rollBack();
         $this->_profiler->queryEnd($q);
-        return true;
+        return $this;
     }
 
     /**
@@ -734,7 +738,7 @@ abstract class Zend_Db_Adapter_Abstract
      *
      * @param string|Zend_Db_Select $sql An SQL SELECT statement.
      * @param mixed $bind Data to bind into SELECT placeholders.
-     * @return string
+     * @return array
      */
     public function fetchAssoc($sql, $bind = array())
     {
@@ -771,7 +775,7 @@ abstract class Zend_Db_Adapter_Abstract
      *
      * @param string|Zend_Db_Select $sql An SQL SELECT statement.
      * @param mixed $bind Data to bind into SELECT placeholders.
-     * @return string
+     * @return array
      */
     public function fetchPairs($sql, $bind = array())
     {
@@ -1064,7 +1068,7 @@ abstract class Zend_Db_Adapter_Abstract
      * can invoke it.
      *
      * @param string $key
-     * @returns string
+     * @return string
      */
     public function foldCase($key)
     {

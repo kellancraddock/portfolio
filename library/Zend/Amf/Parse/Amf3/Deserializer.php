@@ -15,8 +15,9 @@
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage Parse_Amf3
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id: Deserializer.php 16971 2009-07-22 18:05:45Z mikaelkael $
  */
 
 /** Zend_Amf_Parse_Deserializer */
@@ -33,7 +34,7 @@ require_once 'Zend/Amf/Parse/TypeLoader.php';
  * @todo       Class could be implmented as Factory Class with each data type it's own class.
  * @package    Zend_Amf
  * @subpackage Parse_Amf3
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
@@ -124,10 +125,10 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
      * - 0x00200000 - 0x3FFFFFFF : 1xxxxxxx 1xxxxxxx 1xxxxxxx xxxxxxxx
      * - 0x40000000 - 0xFFFFFFFF : throw range exception
      *
-     *
      * 0x04 -> integer type code, followed by up to 4 bytes of data.
      *
-     * @see:   Parsing integers on OSFlash {http://osflash.org/amf3/parsing_integers>} for the AMF3 integer data format.
+     * Parsing integers on OSFlash for the AMF3 integer data format:
+     * @link http://osflash.org/amf3/parsing_integers
      * @return int|float
      */
     public function readInteger()
@@ -152,7 +153,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
             // Check if the integer should be negative
             if (($result & 0x10000000) != 0) {
                 //and extend the sign bit
-                $result |= 0xe0000000;
+                $result |= ~0xFFFFFFF;
             }
         }
         return $result;
@@ -250,7 +251,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
 
         // Create a holder for the array in the reference list
         $data = array();
-        $this->_referenceObjects[] &= $data;
+        $this->_referenceObjects[] =& $data;
         $key = $this->readString();
 
         // Iterating for string based keys.

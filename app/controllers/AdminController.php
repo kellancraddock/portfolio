@@ -1,6 +1,7 @@
 <?php
 	require_once("../app/models/ProjectModel.php");
-	require_once("../app/models/ContributionsModel.php");
+	require_once("../app/models/ContributionModel.php");
+	require_once("../app/models/ImageModel.php");
 	class AdminController extends Zend_Controller_Action
 	{
 		public function init()
@@ -22,13 +23,15 @@
 		public function newAction()
 		{
 			$project_model = new ProjectModel();
-			$contributions_model = new ContributionsModel();
-			//$project_model = new ProjectModel();
+			$contributions_model = new ContributionModel();
+			$image_model = new ImageModel();
 			
 			$contributions = explode(", ", $_POST['contributions']);
 			$project = array($_POST['title'], $_POST['description']);
-
+			//Create project
 			$project_id = $project_model->addOne($project);
+			//Create default image
+			$image_model->addDefault($project_id);
 			
 			if ($project_id && !empty($contributions)) {
 				foreach ($contributions as $contribution) {
@@ -43,13 +46,15 @@
 		public function deleteAction()
 		{
 			$project_model = new ProjectModel();
-			$contributions_model = new ContributionsModel();
-			$project_id = array($this->_request->getParam('id'));
+			$contributions_model = new ContributionModel();
+			$image_model = new ImageModel();
+			$project_id = $this->_request->getParam('id');
 			
 			$success = $project_model->deleteOne($project_id);
 			
 			if ($success) {
 				$contributions_model->deleteAll($project_id);
+				$image_model->deleteAll($project_id);
 			}
 			
 			header("Location: /admin/projects");
@@ -57,9 +62,14 @@
 		
 		public function editAction()
 		{
+			$image_model = new ImageModel();
 			$project_model = new ProjectModel();
-			$project_id = array($this->_request->getParam('id'));
-			$this->view->project = $project_model->getOne($project_id);
+			$project_id = $this->_request->getParam('id');
+			
+			$this->project = $project_model->getOne($project_id);
+			$this->project['images'] = $image_model->getAll($project_id);
+			
+			$this->view->project = $this->project;
 		}
 		
 		public function updateAction()

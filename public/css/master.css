@@ -456,7 +456,7 @@ h4.contact span {
 	-webkit-border-top-right-radius: 10px;
 	position: absolute;
 	right: 0;
-	bottom: -122px;
+	bottom: 0;
 }
 
 .gallery_controls.main h2, .gallery_controls.main p {

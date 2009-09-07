@@ -27,7 +27,7 @@
 					$new_name = md5(rand()) .'-' . $project_id . '.' . $ext;
 
 					//Add rename filter
-					$adapter->addFilter('Rename', '/Applications/MAMP/htdocs/repositories/portfolio/public/uploads/' . $new_name);
+					$adapter->addFilter('Rename', UPLOAD_PATH . $new_name);
 				} catch(Zend_File_Transfer_Exception $e) {
 					die($e->getMessage());
 				}
@@ -49,7 +49,11 @@
 			$image_id = $this->_request->getParam('id');
 			$project_id = $this->_request->getParam('project');
 			
+			$file_name = $this->image_model->getOne($image_id);
+			//Delete record
 			$this->image_model->deleteOne($image_id, $project_id);
+			//Delete file
+			unlink(UPLOAD_PATH . $file_name);
 			
 			header("Location: /admin/edit/id/{$project_id}");
 			

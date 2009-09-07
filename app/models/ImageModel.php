@@ -34,6 +34,18 @@
 			return $db->insert($this->table, $insertArgs);
 		}
 		
+		function getOne($image_id)
+		{
+			//Connect to database
+			$db = $this->getDefaultAdapter();
+			
+			//Set arguments to select statement
+			$select = "SELECT file_name FROM $this->table WHERE id = '{$image_id}'";
+		
+			//Select from table
+			return $db->fetchOne($select);
+		}
+		
 		function getAll($project_id)
 		{
 			//Connect to database
@@ -53,7 +65,7 @@
 			return $return_array;
 		}
 		
-		function getThumb($project_id)
+		function getPrimary($project_id)
 		{
 			//Connect to database
 			$db = $this->getDefaultAdapter();

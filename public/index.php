@@ -8,6 +8,9 @@ ini_set('display_errors', 'on');
 //Modify include path to library
 ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . '../library');
 
+//Define upload directory
+define('UPLOAD_PATH', '/Applications/MAMP/htdocs/repositories/portfolio/public/uploads/');
+
 //Zend Framework Includes
 require_once "Zend/Loader.php";
 
@@ -54,13 +57,13 @@ $db = Zend_Db::factory( $config->database );
 Zend_DB_Table_Abstract::setDefaultAdapter($db);
 
 //Register Helpers with Brokers
-//Zend_Controller_Action_HelperBroker::addPath('../application/helpers/actions', 'Helper_');
+Zend_Controller_Action_HelperBroker::addPath('../app/helpers/actions', 'Helper_');
 
 //Set View Helpers
-//$view = new Zend_View();
-//$view->addHelperPath('../application/helpers/views/', 'View_Helper_');			
-//$renderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-//$renderer->setView($view);
+$view = new Zend_View();
+$view->addHelperPath('../app/helpers/views/', 'View_Helper_');			
+$renderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+$renderer->setView($view);
 
 //Get Front Controller
 $front = Zend_Controller_Front::getInstance();

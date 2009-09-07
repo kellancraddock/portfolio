@@ -50,11 +50,19 @@
 			$image_model = new ImageModel();
 			$project_id = $this->_request->getParam('id');
 			
+			$images = $image_model->getAll($project_id);
+			//Delete Project record
 			$success = $project_model->deleteOne($project_id);
 			
 			if ($success) {
+				//Delete contribution records
 				$contributions_model->deleteAll($project_id);
+				//Delete image records
 				$image_model->deleteAll($project_id);
+				//Delete files
+				foreach ($images as $image) {
+					unlink(UPLOAD_PATH . $image['file_name']);
+				}
 			}
 			
 			header("Location: /admin/projects");

@@ -35,6 +35,7 @@ body {
 	font-size: 12px;
 	margin: 0;
 	padding: 0;
+	position: relative;
 }
 
 p {
@@ -111,6 +112,29 @@ h4.contact span {
 #gallery.secondary {
 	height: 300px;
 	overflow: hidden;
+}
+
+/* !Alert */
+
+#alert {
+	color: #fff;
+	position: fixed;
+	top: 0;
+	background: #fff;
+	padding: 10px;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	width: 100%;
+	display: none;
+}
+
+#alert.success {
+	background: green;
+}
+
+#alert.fail {
+	background: red;
 }
 
 /* !Columns */

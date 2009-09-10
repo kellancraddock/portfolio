@@ -7,6 +7,7 @@
 			//$this->session_alert = new Zend_Session_Namespace('');
 			//$this->Model = new Model();
 			$this->view->nav_home = 'active';
+			$this->is_ajax = $this->getRequest()->isXmlHttpRequest();
 		}
 		
 		public function indexAction()
@@ -14,7 +15,7 @@
 			$image_model = new ImageModel();
 			$project_model = new ProjectModel();
 			
-			$project_id = $this->_request->getParam('id');
+			$project_id = ($this->is_ajax) ? $_POST['id'] : $this->_request->getParam('id');
 			//If the project id isnt set, get a random one
 			if (!$project_id) {
 				$active_projects = $project_model->getActive();
@@ -23,8 +24,12 @@
 			
 			$this->project = $project_model->getOne($project_id);
 			$this->project['image'] = $image_model->getPrimary($project_id);
-
-			$this->view->project = $this->project;
+			
+			if ($this->is_ajax) {
+				$this->_helper->json($_POST['id']);
+			} else {
+				$this->view->project = $this->project;
+			}
 		}
 		
 	}

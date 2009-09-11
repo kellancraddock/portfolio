@@ -14,7 +14,7 @@
 			//Select from table
 			return $db->fetchRow($select);
 		}
-
+		
 		function getAll()
 		{
 			//Connect to database

@@ -109,6 +109,10 @@ h4.contact span {
 	overflow: hidden;
 }
 
+#gallery ul.project_images li {
+	float: left;
+}
+
 #gallery.secondary {
 	height: 300px;
 	overflow: hidden;

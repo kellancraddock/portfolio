@@ -4,33 +4,52 @@
 	class IndexController extends Zend_Controller_Action
 	{
 		public function init() {
-			//$this->session_alert = new Zend_Session_Namespace('');
-			//$this->Model = new Model();
+			$this->image_model = new ImageModel();
+			$this->project_model = new ProjectModel();
 			$this->view->nav_home = 'active';
 			$this->is_ajax = $this->getRequest()->isXmlHttpRequest();
 		}
 		
 		public function indexAction()
-		{
-			$image_model = new ImageModel();
-			$project_model = new ProjectModel();
+		{	
+			$active_projects = $this->project_model->getActive();
+			$project_id = $active_projects[array_rand($active_projects)]['id'];
 			
-			$project_id = ($this->is_ajax) ? $_POST['id'] : $this->_request->getParam('id');
-			//If the project id isnt set, get a random one
-			if (!$project_id) {
-				$active_projects = $project_model->getActive();
-				$project_id = $active_projects[array_rand($active_projects)]['id'];
-			}
+			$this->project = $this->project_model->getOne($project_id);
+			$this->project['image'] = $this->image_model->getPrimary($project_id);
 			
-			$this->project = $project_model->getOne($project_id);
-			$this->project['image'] = $image_model->getPrimary($project_id);
-			
-			if ($this->is_ajax) {
-				$this->_helper->json($_POST['id']);
-			} else {
-				$this->view->project = $this->project;
-			}
+			$this->view->project = $this->project;
 		}
+		
+		public function imagesAction()
+		{
+			if (!$this->is_ajax) {
+				header("Location: /");
+			}
+			$ignore = $_POST['id'];
+			$active_projects = $this->project_model->getActive();
+			
+			$images = array();
+			foreach ($active_projects as $project) {
+				if ($project['id'] != $ignore) {
+				$images[] = $this->image_model->getPrimary($project['id']);
+				}
+			}
+			
+			$this->_helper->json($images);
+			
+		}
+		
+		public function infoAction()
+		{
+			if (!$this->is_ajax) {
+				header("Location: /");
+			}
+			$this->project = $this->project_model->getOne($_POST['id']);
+			$this->_helper->json($this->project);
+		}
+		
+		
 		
 	}
 	

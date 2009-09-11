@@ -1,22 +1,20 @@
 function BaseModel() {
 	var self = this;
-	this.return_data;
 	
-	this.data_adapter = function(sendData, controller, listener) {
+	this.data_adapter = function(object, callback) {
+		self.data = (object.data) ? object.data : '';
+		self.location = (object.location) ? object.location : '';
+		
 		$.ajax({
 		  async: true, // default
 		  contentType: 'application/x-www-form-urlencoded', //default
-		  data: sendData, 
+		  data: self.data, 
 		  dataType: 'json',
-		  error: function(returnData, textStatus, errorThrown) { console.log("SendMessage Ajax broken: " + textStatus);  },
-		  success: function(returnData, textStatus) { self.return_data = returnData; $.event.trigger(listener); },
+		  error: function(returnData, textStatus, errorThrown) { callback(returnData) },
+		  success: function(returnData, textStatus) { callback(returnData) },
 		  timeout: 20000, // milliseconds
-		  url: '/' + controller,
+		  url: '/' + self.location,
 		  type: 'post'
 		});	
-	}
-	
-	this.get_data = function() {
-		return self.return_data;
 	}
 }

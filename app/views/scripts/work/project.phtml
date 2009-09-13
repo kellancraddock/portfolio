@@ -41,10 +41,16 @@
 	</li>
 </ul>
 <div id="thumbs">
-	<ul class="clearfix">
+	<span class="control left">
+		<a class="left" href="#">left</a>
+	</span>
+	<span class="control right">
+		<a class="right" href="#">right</a>
+	</span>
+	<ul class="thumbs clearfix">
 	<?php
 		foreach ($this->thumbs as $key => $thumb) {
-			echo ($thumb['project_id'] == $this->project['id']) ? "<li class=\"active\">" : "<li>";
+			echo ($thumb['project_id'] == $this->project['id']) ? "<li id=\"{$thumb['project_id']}\" class=\"active\">" : "<li>";
 			echo "<a href=\"/work/project/id/{$thumb['project_id']}\">";
 			if (isset($thumb['file_name'])) {
 				echo "<img src=\"/uploads/{$thumb['file_name']}\" alt=\"thumbnail\" />";

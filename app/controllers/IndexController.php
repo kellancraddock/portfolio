@@ -8,6 +8,7 @@
 			$this->project_model = new ProjectModel();
 			$this->view->nav_home = 'active';
 			$this->is_ajax = $this->getRequest()->isXmlHttpRequest();
+			$this->view->headScript()->appendFile('/javascript/controllers/IndexController.js');
 		}
 		
 		public function indexAction()

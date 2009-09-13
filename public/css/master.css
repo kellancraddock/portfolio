@@ -410,7 +410,7 @@ h4.contact span {
 	padding: 5px;
 }
 
-.nav.gallery li a {
+.nav.gallery li a, #thumbs span a {
 	display: block;
 	padding: 16px;
 }
@@ -423,11 +423,11 @@ h4.contact span {
 	float: right;
 }
 
-.nav.gallery li.left a {
+.nav.gallery li.left a, #thumbs span.left a {
 	background: transparent url(/images/controls_left.png) center center no-repeat;
 }
 
-.nav.gallery li.right a {
+.nav.gallery li.right a, #thumbs span.right a {
 	background: transparent url(/images/controls_right.png) center center no-repeat;
 }
 
@@ -439,6 +439,33 @@ h4.contact span {
 	text-decoration: none;
 	font-weight: bold;
 	font-size: 14px;
+}
+
+/* !Thumbs Gallery Nav */
+
+#thumbs {
+	overflow: hidden;
+}
+
+#thumbs span.right, #thumbs span.left {
+	display: none;
+	background: #333333 url(/images/button_bg_04.png) repeat-x center bottom;
+	width: 100px;
+	height: 50px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	text-indent: -9999px;
+	margin-top: 20px;
+	position: absolute;
+	z-index: 1;
+}
+
+#thumbs span.left {
+	left: 0;
+}
+
+#thumbs span.right {
+	right: 0;
 }
 
 /* !Contact Navigation */
@@ -484,7 +511,7 @@ h4.contact span {
 	-webkit-border-top-right-radius: 10px;
 	position: absolute;
 	right: 0;
-	bottom: 0;
+	bottom: -100px;
 }
 
 .gallery_controls.main h2, .gallery_controls.main p {

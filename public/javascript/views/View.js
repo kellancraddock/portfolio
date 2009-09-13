@@ -2,13 +2,15 @@ View.prototype = new BaseView();
 
 function View() {
 	var self = this;
-	this.slide_width = 1000;
+	this.slide_width;
+	this.off_set;
+	this.gallery;
+	this.controls;
 	
 	this.slideshow_load = function(images) {
 		try {
-			self.project_images = $('#gallery .project_images');
 			$(images).each(function(i) {
-				self.project_images.append('<li id="' + images[i]['project_id'] + '"><img src="/uploads/' + images[i]['file_name'] + '" /></li>')
+				self.gallery.append('<li id="' + images[i]['project_id'] + '"><img src="/uploads/' + images[i]['file_name'] + '" /></li>')
 			});
 	
 			self.slideshow_setwidth();
@@ -19,43 +21,90 @@ function View() {
 		}
 	}
 	
-	this.slideshow_move = function() {
-		if ($('.active', $('#gallery .project_images')).next('li').length > 0) {
-			self.slideshow_resetactive($('.active', $('#gallery .project_images')).next('li'));
-			var margin = ($('.active', $('#gallery .project_images')).prevAll('li').length) * self.slide_width;
-			$('#gallery .project_images').animate({
-				marginLeft : '-' + margin + 'px' 
-			});
-			return $('.active', '#gallery .project_images').attr('id');
+	this.slideshow_next = function() {
+		var margin = ($('.active', self.gallery).prevAll('li').length - self.off_set) * self.slide_width;
+		self.gallery.stop().animate({
+			marginLeft : '-' + margin + 'px' 
+		});
+		return $('.active', self.gallery).attr('id');
+	}
+	
+	this.slideshow_prev = function() {
+		var margin = ($('.active', self.gallery).prevAll('li').length - self.off_set) * self.slide_width;
+		self.gallery.animate({
+			marginLeft : '-' + margin + 'px' 
+		});
+		return $('.active', self.gallery).attr('id');
+	}
+	
+	this.slideshow_center = function(active) {
+		self.slideshow_resetactive(active);
+		//Check to see which side of the active has more items them move
+		if ($('.active', self.gallery).prev('li').length > $('.active', self.gallery).next('li').length) {
+			self.slideshow_next();
 		} else {
-			return false;
+			self.slideshow_prev();
 		}
 	}
 	
 	this.slideshow_setwidth = function() {
-		var width = $('#gallery .project_images li').length * self.slide_width;
-		$('#gallery .project_images').css({'width' : width});
+		var width = $('li', self.gallery).length * self.slide_width;
+		self.gallery.css({'width' : width});
 	}
 	
 	this.slideshow_resetactive = function(active) {
-		$('#gallery .project_images li').removeClass('active');
+		$('li', self.gallery).removeClass('active');
 		$(active).addClass('active');
 	}
 	
 	this.slideshow_reset = function() {
-		$('#gallery .project_images li').removeClass('active');
-		$('#gallery .project_images li:first').addClass('active');
+		$('li', self.gallery).removeClass('active');
+		$('li:first', self.gallery).addClass('active');
 			
-		$('#gallery .project_images').animate({
+		self.gallery.animate({
 			marginLeft : '0px'
 		});
-		return $('.active', '#gallery .project_images').attr('id');
+		return $('.active', self.gallery).attr('id');
 	}
 	
-	this.updateControlls = function(response) {
-		console.log(response['id']);
+	this.controls_update = function(response) {
 		$('.gallery_controls h2', '#gallery').html(response['title']);
 		$('.gallery_controls p', '#gallery').html(response['description']);
 		$('.gallery_controls .nav .launch_btn a', '#gallery').attr('href', '/work/project/id/' + response['id']);
 	}
+	
+	this.controls_move = function(object) {
+		self.controls = $('.gallery_controls', '.controls_wrapper');
+		var header_height = 42;
+		var total_height = self.controls.height();
+		var adjusted_height = (total_height - header_height);
+		
+		self.controls = $('.gallery_controls', '.controls_wrapper');
+		if (object.direction == 'down') {
+			self.controls.stop().animate({
+				bottom : '-' + total_height + 'px',
+				duration: 1000,
+				easing : 'easeOutbounce'
+			});
+		} else if(object.direction == 'up') {
+			self.controls.stop().animate({
+				bottom : '-' + adjusted_height + 'px',
+				duration: 1000,
+				easing : 'easeOutbounce'
+			});
+		} else if(object.direction == 'open') {
+			self.controls.stop().animate({
+				bottom : '0px'
+			}, 500);
+		}
+	}
+	
+	this.controls_show = function() {
+		self.controls.fadeIn('fast');
+	}
+	
+	this.controls_hide = function() {
+		self.controls.fadeOut('fast');
+	}
 }
+

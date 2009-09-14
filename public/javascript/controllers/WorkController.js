@@ -6,18 +6,23 @@ function WorkController() {
 	this.slideshow_model;
 	this.gallery;
 	this.controls;
+	this.callouts;
 	
 	//Constructor
 	this.construct = function() {
-	
+		//Slideshow Model
+		self.slideshow_model = new SlideShowModel();
+		
 		self.gallery = $('#thumbs ul.thumbs');
 		self.controls = $('#thumbs span.control');
+		self.callouts = $('.callouts.work', '#main_container');
 		
 		//Set view variables
 		self.view.gallery = self.gallery;
 		self.view.slide_width = 194;
 		self.view.off_set = 2;
 		self.view.controls = self.controls;
+		self.view.callouts = self.callouts
 		self.view.slideshow_setwidth();
 		
 		//Bind controls hide show events
@@ -32,7 +37,8 @@ function WorkController() {
 		//Bind thumbs click events
 		self.gallery.children('li').bind('click', function(e) {
 			e.preventDefault();
-			self.view.slideshow_center(this);
+			var new_project = self.view.slideshow_center(this);
+			self.updateInfoAction.manual(new_project);
 		});
 		
 		//Bind controls move click events
@@ -64,52 +70,31 @@ function WorkController() {
 	}
 	
 	this.controlsAction = {
-		auto: function() {
-				//Set SlideShow interval
-				self.interval = setInterval(function() {
-					self.view.controls_move({direction : 'down'});
-					setTimeout(function() {
-						var new_project = self.view.slideshow_next();
-						(new_project) ? self.updateInfoAction.auto(new_project) : self.updateInfoAction.auto(self.view.slideshow_reset());
-					}, 800);
-				}, 4000);
-			},
 		next: function() {
 				if ($('.active', self.gallery).next('li').length) {
 					self.view.slideshow_resetactive($('.active', self.gallery).next('li'));
 					var new_project = self.view.slideshow_next();
+					console.log(new_project);
 				}
-				//(new_project) ? self.updateInfoAction.manual(new_project) : self.updateInfoAction.manual(self.view.slideshow_reset());
+				self.updateInfoAction.manual(new_project);
 			},
 		prev: function() {
 				if ($('.active', self.gallery).prev('li').length) {
 					self.view.slideshow_resetactive($('.active', self.gallery).prev('li'));
 					var new_project = self.view.slideshow_prev();
+					console.log(new_project);
 				}
-				//(new_project) ? self.updateInfoAction.manual(new_project) : self.updateInfoAction.manual(self.view.slideshow_reset());
-			},
-		pause: function() {
-			clearInterval(self.interval);
-			self.view.controls_move({direction : 'open'});
+				self.updateInfoAction.manual(new_project);
 			}
 	}
 	
 	this.updateInfoAction = {
-		auto: function(id) {
-			self.slideshow_model.getOne({
-				data : 'id=' + id,
-				location : 'index/info',
-			}, function(response) {
-				self.view.controls_update(response);
-				self.view.controls_move({direction : 'up'});
-			});
-		},
 		manual: function(id) {
 			self.slideshow_model.getOne({
 				data : 'id=' + id,
-				location : 'index/info',
+				location : 'work/project',
 			}, function(response) {
-				self.view.controls_update(response);
+				self.view.project_update(response);
 			});
 		}
 	}

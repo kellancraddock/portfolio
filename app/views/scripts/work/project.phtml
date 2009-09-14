@@ -7,15 +7,15 @@
 </div>
 <!-- Callouts -->
 <ul class="callouts work clearfix">
-	<li>
+	<li class="title">
 		<strong>Project:</strong>
 		<h3><?= $this->project['title'] ?></h3>
 	</li>
-	<li>
+	<li class="about">
 		<h3>About The Project</h3>
 		<p><?= $this->project['description'] ?></p>
 	</li>
-	<li>
+	<li class="contributions">
 		<h3>Project Contributions</h3>
 		<ul class="normal">
 			<?php
@@ -25,7 +25,7 @@
 			?>
 		</ul>
 	</li>
-	<li>
+	<li class="views">
 		<h3>Views</h3>
 		<ul class="project_views clearfix">
 		<?php
@@ -50,7 +50,7 @@
 	<ul class="thumbs clearfix">
 	<?php
 		foreach ($this->thumbs as $key => $thumb) {
-			echo ($thumb['project_id'] == $this->project['id']) ? "<li id=\"{$thumb['project_id']}\" class=\"active\">" : "<li>";
+			echo ($thumb['project_id'] == $this->project['id']) ? "<li id=\"{$thumb['project_id']}\" class=\"active\">" : "<li id=\"{$thumb['project_id']}\" >";
 			echo "<a href=\"/work/project/id/{$thumb['project_id']}\">";
 			if (isset($thumb['file_name'])) {
 				echo "<img src=\"/uploads/{$thumb['file_name']}\" alt=\"thumbnail\" />";

@@ -6,6 +6,7 @@ function View() {
 	this.off_set;
 	this.gallery;
 	this.controls;
+	this.callouts;
 	
 	this.slideshow_load = function(images) {
 		try {
@@ -41,9 +42,9 @@ function View() {
 		self.slideshow_resetactive(active);
 		//Check to see which side of the active has more items them move
 		if ($('.active', self.gallery).prev('li').length > $('.active', self.gallery).next('li').length) {
-			self.slideshow_next();
+			return self.slideshow_next();
 		} else {
-			self.slideshow_prev();
+			return self.slideshow_prev();
 		}
 	}
 	
@@ -71,6 +72,21 @@ function View() {
 		$('.gallery_controls h2', '#gallery').html(response['title']);
 		$('.gallery_controls p', '#gallery').html(response['description']);
 		$('.gallery_controls .nav .launch_btn a', '#gallery').attr('href', '/work/project/id/' + response['id']);
+	}
+	
+	this.project_update = function(response) {
+		$('li.title h3', self.callouts).html(response['title']);
+		$('li.about p', self.callouts).html(response['description']);
+		var contributions = '';
+		$.each(response['contributions'], function(key, value) {
+			contributions += '<li>' + value['contribution'] + '</li>';
+		});
+		$('li.contributions ul', self.callouts).html(contributions);
+		var views = '';
+		$.each(response['images'], function(key, value) {
+			views += '<li><a href="/work/project/id/' + response['id'] + '/view/' + value.id + '"><img alt="thumbnail" src="/uploads/' + value.file_name + '"/></a></li>';
+		});
+		$('li.views ul.project_views', self.callouts).html(views);
 	}
 	
 	this.controls_move = function(object) {

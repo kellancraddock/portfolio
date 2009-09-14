@@ -2,10 +2,11 @@ function Gallery() {
 	var self = this;
 	
 	this.slide_width;
-	this.off_set;
+	this.off_set = 0;
 	this.gallery;
 	this.controls;
 	this.callouts;
+	this.views;
 
 	this.slideshow_load = function(images) {
 		try {
@@ -21,29 +22,33 @@ function Gallery() {
 		}
 	}
 	
-	this.slideshow_next = function() {
+	this.slideshow_next = function(fn) {
 		var margin = ($('.active', self.gallery).prevAll('li').length - self.off_set) * self.slide_width;
+		console.log($('#gallery .active'));
 		self.gallery.stop().animate({
-			marginLeft : '-' + margin + 'px' 
-		});
+			marginLeft : '-' + margin + 'px',
+			duration: 2300
+		}, (fn) ? fn : function() {});
 		return $('.active', self.gallery).attr('id');
 	}
 	
-	this.slideshow_prev = function() {
+	this.slideshow_prev = function(fn) {
 		var margin = ($('.active', self.gallery).prevAll('li').length - self.off_set) * self.slide_width;
+		console.log($('#gallery .active').prevAll('li'));
 		self.gallery.animate({
-			marginLeft : '-' + margin + 'px' 
-		});
+			marginLeft : '-' + margin + 'px',
+			duration: 2300
+		}, (fn) ? fn : function() {});
 		return $('.active', self.gallery).attr('id');
 	}
 	
-	this.slideshow_center = function(active) {
+	this.slideshow_center = function(active, fn) {
 		self.slideshow_resetactive(active);
 		//Check to see which side of the active has more items them move
 		if ($('.active', self.gallery).prev('li').length > $('.active', self.gallery).next('li').length) {
-			return self.slideshow_next();
+			return self.slideshow_next((fn) ? fn : function() {});
 		} else {
-			return self.slideshow_prev();
+			return self.slideshow_prev((fn) ? fn : function() {});
 		}
 	}
 	

@@ -33,7 +33,7 @@
 			$db = $this->getDefaultAdapter();
 			
 			//Set arguments to select statement
-			$select = "SELECT * FROM $this->table WHERE is_active = '1'";
+			$select = "SELECT * FROM $this->table WHERE is_active = '1' ORDER BY id";
 		
 			//Select from table
 			return $db->fetchAssoc($select);

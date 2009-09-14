@@ -450,7 +450,7 @@ h4.contact span {
 #thumbs span.right, #thumbs span.left {
 	display: none;
 	background: #333333 url(/images/button_bg_04.png) repeat-x center bottom;
-	width: 100px;
+	width: 75px;
 	height: 50px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -464,8 +464,16 @@ h4.contact span {
 	left: 0;
 }
 
+#thumbs span.left a {
+	background-position: 30% 50%;
+}
+
 #thumbs span.right {
 	right: 0;
+}
+
+#thumbs span.right a {
+	background-position: 70% 50%;
 }
 
 /* !Contact Navigation */

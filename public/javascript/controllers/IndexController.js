@@ -14,19 +14,19 @@ function IndexController() {
 		self.gallery = $('#gallery .project_images');
 		
 		//Set view variables
-		self.view.gallery = self.gallery;
-		self.view.slide_width = 1000;
-		self.view.off_set = 0;
-		self.view.slideshow_setwidth();
+		self.view.main_gallery.gallery = self.gallery;
+		self.view.main_gallery.slide_width = 1000;
+		self.view.main_gallery.off_set = 0;
+		self.view.main_gallery.slideshow_setwidth();
 		
 		//reset control position
-		self.view.controls_move({direction : 'up'});
+		self.view.main_gallery.controls_move({direction : 'up'});
 		
 		$('#gallery').bind('mouseenter', function() {
 			self.controlsAction.pause();	
 		}).bind('mouseleave', function() {
 			setTimeout(function() {
-				self.view.controls_move({direction : 'up'});
+				self.view.main_gallery.controls_move({direction : 'up'});
 			}, 500);
 			self.controlsAction.auto();
 		});
@@ -48,7 +48,7 @@ function IndexController() {
 			data : 'id=' + current_project, 
 			location : 'index/images', 
 		}, function(response) {
-			if(self.view.slideshow_load(response)) {
+			if(self.view.main_gallery.slideshow_load(response)) {
 				self.controlsAction.auto();
 			} else {
 				self.view.alert('error', 'Error Loading Projects');
@@ -60,33 +60,33 @@ function IndexController() {
 		auto: function() {
 				//Set SlideShow interval
 				self.interval = setInterval(function() {
-					self.view.controls_move({direction : 'down'});
+					self.view.main_gallery.controls_move({direction : 'down'});
 					setTimeout(function() {
 						if ($('.active', self.gallery).next('li').length) {
-							self.view.slideshow_resetactive($('.active', self.gallery).next('li'));
-							var new_project = self.view.slideshow_next();
+							self.view.main_gallery.slideshow_resetactive($('.active', self.gallery).next('li'));
+							var new_project = self.view.main_gallery.slideshow_next();
 						}
-						(new_project) ? self.updateInfoAction.auto(new_project) : self.updateInfoAction.auto(self.view.slideshow_reset());
+						(new_project) ? self.updateInfoAction.auto(new_project) : self.updateInfoAction.auto(self.view.main_gallery.slideshow_reset());
 					}, 800);
 				}, 8000);
 			},
 		next: function() {
 				if ($('.active', self.gallery).next('li').length) {
-					self.view.slideshow_resetactive($('.active', self.gallery).next('li'));
-					var new_project = self.view.slideshow_next();
+					self.view.main_gallery.slideshow_resetactive($('.active', self.gallery).next('li'));
+					var new_project = self.view.main_gallery.slideshow_next();
 				}
-				(new_project) ? self.updateInfoAction.manual(new_project) : self.updateInfoAction.manual(self.view.slideshow_reset());
+				(new_project) ? self.updateInfoAction.manual(new_project) : self.updateInfoAction.manual(self.view.main_gallery.slideshow_reset());
 			},
 		prev: function() {
 				if ($('.active', self.gallery).prev('li').length) {
-					self.view.slideshow_resetactive($('.active', self.gallery).prev('li'));
-					var new_project = self.view.slideshow_prev();
+					self.view.main_gallery.slideshow_resetactive($('.active', self.gallery).prev('li'));
+					var new_project = self.view.main_gallery.slideshow_prev();
 				}
-				(new_project) ? self.updateInfoAction.manual(new_project) : self.updateInfoAction.manual(self.view.slideshow_reset());
+				(new_project) ? self.updateInfoAction.manual(new_project) : self.updateInfoAction.manual(self.view.main_gallery.slideshow_reset());
 			},
 		pause: function() {
 			clearInterval(self.interval);
-			self.view.controls_move({direction : 'open'});
+			self.view.main_gallery.controls_move({direction : 'open'});
 			}
 	}
 	
@@ -96,8 +96,8 @@ function IndexController() {
 				data : 'id=' + id,
 				location : 'index/info',
 			}, function(response) {
-				self.view.controls_update(response);
-				self.view.controls_move({direction : 'up'});
+				self.view.main_gallery.controls_update(response);
+				self.view.main_gallery.controls_move({direction : 'up'});
 			});
 		},
 		manual: function(id) {
@@ -105,7 +105,7 @@ function IndexController() {
 				data : 'id=' + id,
 				location : 'index/info',
 			}, function(response) {
-				self.view.controls_update(response);
+				self.view.main_gallery.controls_update(response);
 			});
 		}
 	}

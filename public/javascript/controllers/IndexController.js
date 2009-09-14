@@ -22,10 +22,12 @@ function IndexController() {
 		//reset control position
 		self.view.controls_move({direction : 'up'});
 		
-		$('#gallery').bind('mouseover', function() {
+		$('#gallery').bind('mouseenter', function() {
 			self.controlsAction.pause();	
-		}).bind('mouseout', function() {
-			self.view.controls_move({direction : 'up'});
+		}).bind('mouseleave', function() {
+			setTimeout(function() {
+				self.view.controls_move({direction : 'up'});
+			}, 500);
 			self.controlsAction.auto();
 		});
 		
@@ -66,7 +68,7 @@ function IndexController() {
 						}
 						(new_project) ? self.updateInfoAction.auto(new_project) : self.updateInfoAction.auto(self.view.slideshow_reset());
 					}, 800);
-				}, 4000);
+				}, 8000);
 			},
 		next: function() {
 				if ($('.active', self.gallery).next('li').length) {

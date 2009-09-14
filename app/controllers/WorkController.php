@@ -7,6 +7,7 @@
 		public function init() {
 			$this->view->nav_work = 'active';
 			$this->view->headScript()->appendFile('/javascript/controllers/WorkController.js');
+			$this->is_ajax = $this->getRequest()->isXmlHttpRequest();
 		}
 
 		public function indexAction()
@@ -33,6 +34,10 @@
 			$project_id = $this->_request->getParam('id');
 			$view_id = $this->_request->getParam('view');
 			
+			if ($this->is_ajax) {
+				$project_id = $_POST['id'];
+			}
+			
 			if (!$project_id) {
 				$thumbs = reset($thumbs);
 				$project_id = $thumbs['project_id'];
@@ -53,7 +58,12 @@
 				$this->project['view'] = $this->project['images']['image1']['file_name'];
 			}
 			
+			if ($this->is_ajax) {
+				$this->_helper->json($this->project);
+			}
+			
 			$this->view->project = $this->project;
+			
 		}
 		
 	}

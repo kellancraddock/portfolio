@@ -87,8 +87,11 @@ function Gallery() {
 		});
 		$('li.contributions ul', self.callouts).html(contributions);
 		var views = '';
+		this.i = 0;
 		$.each(response['images'], function(key, value) {
-			views += '<li><a href="/work/project/id/' + response['id'] + '/view/' + value.id + '"><img alt="thumbnail" src="/uploads/' + value.file_name + '"/></a></li>';
+			var is_active = (self.i == 0) ? ' class="active"' : '';
+			views += '<li' + is_active + ' title="' + value.id + '"><a href="/work/project/id/' + response['id'] + '/view/' + value.id + '"><img alt="thumbnail" src="/uploads/' + value.file_name + '"/></a></li>';
+			self.i++;
 		});
 		$('li.views ul.project_views', self.callouts).html(views);
 	}

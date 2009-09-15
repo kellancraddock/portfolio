@@ -67,7 +67,7 @@ function IndexController() {
 							var new_project = self.view.main_gallery.slideshow_next();
 						}
 						(new_project) ? self.updateInfoAction.auto(new_project) : self.updateInfoAction.auto(self.view.main_gallery.slideshow_reset());
-					}, 800);
+					}, 600);
 				}, 8000);
 			},
 		next: function() {

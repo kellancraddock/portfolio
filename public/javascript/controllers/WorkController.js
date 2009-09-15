@@ -40,6 +40,11 @@ function WorkController() {
 		self.view.work_gallery.slideshow_setwidth();
 		self.view.work_gallery.slideshow_unload();
 		self.view.work_gallery.slideshow_setwidth();
+		
+		//Set views view variables
+		self.view.views_gallery.gallery = self.gallery;
+		self.view.views_gallery.views = self.views;
+		self.view.views_gallery.slide_width = 1000;
 				
 		//Bind controls hide show events
 		self.thumbs.parent('#thumbs').hover(function(e) {
@@ -50,7 +55,7 @@ function WorkController() {
 			}, 300);
 		});
 		
-		//Bind thumbs click events
+		//Bind thumb_gallery click events
 		self.thumbs.children('li').bind('click', function(e) {
 			e.preventDefault();
 			self.view.preloader.start('Loading project');
@@ -80,7 +85,7 @@ function WorkController() {
 			});
 		});
 		
-		//Bind controls move click events
+		//Bind thumb_gallery controls click events
 		$('a.left', self.controls).bind('click', function() {
 			if ($('.active', self.thumbs).prev('li').length) {
 				self.view.preloader.start('Loading project');
@@ -95,6 +100,15 @@ function WorkController() {
 				self.controlsAction.next();
 			}
 			return false;
+		});
+		
+		//Bind views_gallery click events
+		$('li.views ul.project_views li').live('click', function(e) {
+			e.preventDefault();
+			var id = $(this).attr('title');
+			id = '[id=' + id + ']';
+			self.view.views_gallery.slideshow_resetactive($(id, self.gallery));
+			self.view.views_gallery.slideshow_center($('.active', self.gallery));
 		});
 	}
 	

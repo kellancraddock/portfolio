@@ -141,6 +141,28 @@ h4.contact span {
 	background: red;
 }
 
+/* !Preloader */
+
+#preloader {
+	color: #ccc;
+	position: fixed;
+	top: 35%;
+	left: 42%;
+	background: transparent url(/images/transparent_dark.png);
+	font-size: 14px;
+	width: 15%;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	display: none;
+}
+
+#preloader p {
+	background: transparent url(/images/ajax-loader.gif) 20px center no-repeat;
+	padding: 20px;
+	padding-left: 45px;
+	text-align: center;
+}
+
 /* !Columns */
 
 .column {

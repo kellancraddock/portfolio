@@ -146,7 +146,7 @@ h4.contact span {
 #preloader {
 	color: #ccc;
 	position: fixed;
-	top: 35%;
+	top: 275px;
 	left: 42%;
 	background: transparent url(/images/transparent_dark.png);
 	font-size: 14px;

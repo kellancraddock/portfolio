@@ -14,8 +14,9 @@ function View() {
 		this.gallery.children('li').removeClass('active');
 		$('li', this.views).each(function(i) {
 			var src = $(this).children('a').children('img').attr('src');
+			var view_title = $(this).attr('title');
 			var is_active = (i == 0) ? ' class="active"' : '';
-			new_images += '<li' + is_active + ' title="' + id + '"><img alt="project image" src="' + src + '"/></li>';
+			new_images += '<li' + is_active + ' title="' + id + '" id="' + view_title + '"><img alt="project image" src="' + src + '"/></li>';
 		});
 		this.gallery.children('li').addClass('inactive');
 		if (direction == 'next') {
@@ -52,5 +53,8 @@ function View() {
 	
 	//thumbs gallery
 	this.thumbs_gallery = new Gallery();
+	
+	//Views Gallery
+	this.views_gallery = new Gallery();
 }
 

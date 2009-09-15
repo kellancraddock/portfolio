@@ -53,11 +53,14 @@ function WorkController() {
 		//Bind thumbs click events
 		self.thumbs.children('li').bind('click', function(e) {
 			e.preventDefault();
+			self.view.preloader.start('Loading project');
+			
 			var id = $(this).attr('id');
 			var new_project = self.view.thumbs_gallery.slideshow_center(this);
 			var direction = self.view.work_gallery.slideshow_center(this, id);
 			self.updateInfoAction.manual(new_project, function(response) {
 				self.view.thumbs_gallery.project_update(response);
+				self.view.preloader.stop();
 				self.view.work_gallery.slideshow_load(direction, id);
 				self.view.work_gallery.slideshow_setwidth();
 				if(direction == 'next') {
@@ -79,12 +82,18 @@ function WorkController() {
 		
 		//Bind controls move click events
 		$('a.left', self.controls).bind('click', function() {
-			self.controlsAction.prev();
+			if ($('.active', self.thumbs).prev('li').length) {
+				self.view.preloader.start('Loading project');
+				self.controlsAction.prev();
+			}
 			return false;
 		});
 		
 		$('a.right', self.controls).bind('click', function() {
-			self.controlsAction.next();
+			if ($('.active', self.thumbs).next('li').length) {
+				self.view.preloader.start('Loading project');
+				self.controlsAction.next();
+			}
 			return false;
 		});
 	}
@@ -113,6 +122,7 @@ function WorkController() {
 				}
 				self.updateInfoAction.manual(new_project, function(response) {
 					self.view.thumbs_gallery.project_update(response);
+					self.view.preloader.stop();
 					var id = $('.active', self.thumbs).attr('id');
 					self.view.work_gallery.slideshow_load('next', id);
 					self.view.work_gallery.slideshow_setwidth();
@@ -131,6 +141,7 @@ function WorkController() {
 				}
 				self.updateInfoAction.manual(new_project, function(response) {
 					self.view.thumbs_gallery.project_update(response);
+					self.view.preloader.stop();
 					var id = $('.active', self.thumbs).attr('id');
 					self.view.work_gallery.slideshow_load('prev', id);
 					self.view.work_gallery.slideshow_setwidth();
@@ -151,6 +162,7 @@ function WorkController() {
 				location : 'work/project',
 			}, (fn) ? fn : function(response) {
 				self.view.thumbs_gallery.project_update(response);
+				self.view.preloader.stop();
 			});
 		}
 	}

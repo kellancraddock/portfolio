@@ -11,10 +11,10 @@
 		<p>Hello! My name is Kellan Craddock and innovative interactive design gets me excited!</p><p>As an Interactive designer from Portland Oregon, I continually strive to blend engaging graphics with cutting edge programming techniques to create rich and informative user experiences.</p>
 	</li>
 	<li class="two_thirds">
-		<form id="contact_form">
+		<form action="/contact/mail" id="contact_form" method="post">
  			<fieldset class="clearfix">
  				<legend>Contact Me</legend>
- 				<p id="message_status"></p>
+ 				<p id="mail_status"><?= $this->mail_status['message'] ?></p>
  				<label>Name:</label>
  				<input type="text" name="name"/>
  				<label>Email:</label>

@@ -109,6 +109,8 @@ function WorkController() {
 			id = '[id=' + id + ']';
 			self.view.views_gallery.slideshow_resetactive($(id, self.gallery));
 			self.view.views_gallery.slideshow_center($('.active', self.gallery));
+			$(this).siblings('li').removeClass('active');
+			$(this).addClass('active');
 		});
 	}
 	

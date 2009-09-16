@@ -71,7 +71,7 @@
 			$db = $this->getDefaultAdapter();
 			
 			//Set arguments to select statement
-			$select = "SELECT file_name, project_id FROM $this->table WHERE type = 'image1' AND project_id = '{$project_id}'";
+			$select = "SELECT file_name, project_id, id FROM $this->table WHERE type = 'image1' AND project_id = '{$project_id}'";
 		
 			//Select from table
 			return $db->fetchRow($select);

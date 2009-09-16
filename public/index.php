@@ -25,6 +25,9 @@ Zend_Loader::loadClass('Zend_View');
 Zend_Loader::loadClass('Zend_Session');
 Zend_Loader::loadClass('Zend_Session_Namespace');
 Zend_Loader::loadClass('Zend_File_Transfer_Adapter_Http');
+Zend_Loader::loadClass('Zend_Validate_StringLength');
+Zend_Loader::loadClass('Zend_Validate_EmailAddress');
+Zend_Loader::loadClass('Zend_Mail');
 Zend_Loader::loadClass('Zend_Layout');
 
 //StartMVC

@@ -10,6 +10,7 @@
 	<li class="title">
 		<strong>Project:</strong>
 		<h3><?= $this->project['title'] ?></h3>
+		<a class="button" href="http://<?= $this->project['url'] ?>">Launch Project</a>
 	</li>
 	<li class="about">
 		<h3>About The Project</h3>
@@ -30,7 +31,7 @@
 		<ul class="project_views clearfix">
 		<?php
 			foreach ($this->project['images'] as $key => $image) {
-				echo ($image['file_name'] == $this->project['view']) ? "<li class=\"active\">" : "<li>";
+				echo ($image['file_name'] == $this->project['view']) ? "<li class=\"active\" title=\"{$image['id']}\">" : "<li title=\"{$image['id']}\">";
 				echo "<a href=\"/work/project/id/{$this->project['id']}/view/{$image['id']}\">";
 				echo "<img src=\"/uploads/{$image['file_name']}\" alt=\"thumbnail\" />";
 				echo "</a>";
@@ -50,7 +51,7 @@
 	<ul class="thumbs clearfix">
 	<?php
 		foreach ($this->thumbs as $key => $thumb) {
-			echo ($thumb['project_id'] == $this->project['id']) ? "<li id=\"{$thumb['project_id']}\" class=\"active\">" : "<li id=\"{$thumb['project_id']}\" >";
+			echo ($thumb['project_id'] == $this->project['id']) ? "<li id=\"{$thumb['project_id']}\" class=\"active\" >" : "<li id=\"{$thumb['project_id']}\" >";
 			echo "<a href=\"/work/project/id/{$thumb['project_id']}\">";
 			if (isset($thumb['file_name'])) {
 				echo "<img src=\"/uploads/{$thumb['file_name']}\" alt=\"thumbnail\" />";

@@ -24,7 +24,6 @@ function Gallery() {
 	
 	this.slideshow_next = function(fn) {
 		var margin = ($('.active', self.gallery).prevAll('li').length - self.off_set) * self.slide_width;
-		console.log($('#gallery .active'));
 		self.gallery.stop().animate({
 			marginLeft : '-' + margin + 'px',
 			duration: 2300
@@ -34,7 +33,6 @@ function Gallery() {
 	
 	this.slideshow_prev = function(fn) {
 		var margin = ($('.active', self.gallery).prevAll('li').length - self.off_set) * self.slide_width;
-		console.log($('#gallery .active').prevAll('li'));
 		self.gallery.animate({
 			marginLeft : '-' + margin + 'px',
 			duration: 2300
@@ -80,6 +78,7 @@ function Gallery() {
 	
 	this.project_update = function(response) {
 		$('li.title h3', self.callouts).html(response['title']);
+		$('li.title a', self.callouts).attr('href', 'http://' + response['url']);
 		$('li.about p', self.callouts).html(response['description']);
 		var contributions = '';
 		$.each(response['contributions'], function(key, value) {

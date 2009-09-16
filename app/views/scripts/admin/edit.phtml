@@ -8,6 +8,10 @@
 					<input type="text" name="title" id="title" value="<?= $this->project['title'] ?>"/>
 					<label for="description">Description</label>
 					<textarea name="description" id="description"><?= $this->project['description'] ?></textarea>
+					<label for="url">URL http://</label>
+					<input type="text" name="url" id="url" value="<?= $this->project['url'] ?>"/>
+					<label for="contributions">Contributions</label>
+					<input type="text" name="contributions" id="contributions" value="<?= $this->project['contributions'] ?>"/>
 					<label for="status">Status</label>
 					<select id="status" name="status">
 						<option value="1" <?= ($this->project['is_active']) ? 'selected="selected"' : ''; ?>>active</option>

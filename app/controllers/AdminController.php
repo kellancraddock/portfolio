@@ -27,7 +27,7 @@
 			$image_model = new ImageModel();
 			
 			$contributions = explode(", ", $_POST['contributions']);
-			$project = array($_POST['title'], $_POST['description']);
+			$project = array($_POST['title'], $_POST['description'], $_POST['url']);
 			//Create project
 			$project_id = $project_model->addOne($project);
 			//Create default image
@@ -72,10 +72,18 @@
 		{
 			$image_model = new ImageModel();
 			$project_model = new ProjectModel();
+			$contributions_model = new ContributionModel();
+			
 			$project_id = $this->_request->getParam('id');
 			
 			$this->project = $project_model->getOne($project_id);
 			$this->project['images'] = $image_model->getAll($project_id);
+			$contributions = '';
+			foreach ($contributions_model->getOne($project_id) as $contribution) {
+				$contributions .= $contribution['contribution'] . ', ';
+			}
+			
+			$this->project['contributions'] = $contributions;
 			
 			$this->view->project = $this->project;
 		}
@@ -83,8 +91,19 @@
 		public function updateAction()
 		{
 			$project_model = new ProjectModel();
+			$contributions_model = new ContributionModel();
+			
 			$project_id = array($this->_request->getParam('id'));
-			$update = array($_POST['title'], $_POST['description'], $_POST['status']);
+			$update = array($_POST['title'], $_POST['description'], $_POST['url'], $_POST['status']);
+			$contributions = explode(", ", $_POST['contributions']);
+			
+			$contributions_model->deleteAll($project_id[0]);
+			
+			if ($project_id && !empty($contributions)) {
+				foreach ($contributions as $contribution) {
+					$contributions_model->addOne($project_id, array($contribution));
+				}
+			}
 
 			$success = $project_model->updateOne($project_id, $update);
 			

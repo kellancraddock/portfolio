@@ -6,7 +6,7 @@
 	<div class="controls_wrapper">
 		<div class="gallery_controls main">
 			<h2><?= $this->project['title'] ?></h2>
-			<p><?= $this->truncate($this->project['description'], 20) ?></p>
+			<p><?= $this->truncate($this->project['description'], array('limit' => 20)) ?></p>
 			<ul class="nav gallery clearfix">
 				<li class="left"><a href="#"></a></li>
 				<li class="launch_btn"><a href="work/project/id/<?= $this->project['id'] ?>">Launch Project</a></li>
@@ -19,14 +19,14 @@
 <ul class="callouts main clearfix">
 	<li class="who">
 		<h3>Who</h3>
-		<p>Hello! My name is Kellan Craddock and innovative interactive design gets me excited! ...</p>
+		<p><?= $this->truncate('Hello! My name is Kellan Craddock and innovative interactive design gets me excited! As an Interactive designer from Portland Oregon, I continually strive to blend engaging graphics with cutting edge programming techniques to create rich and informative user experiences.', array('limit' => 20, 'url' => '/about')) ?></p>
 	</li>
 	<li class="why">
 		<h3>Why</h3>
-		<p> am passionate about communication. Understanding how graphics, programming, and information come together ...</p>
+		<p><?= $this->truncate('I am passionate about communication. Understanding how graphics, programming, and information come together on the web to create effective user experiences drives my work. Whether itÕs a single page website, a Rich Internet Application, or a fullÐblown content managed online presence, I consistently keep user experience on the forefront.', array('limit' => 20, 'url' => '/about')) ?></p>
 	</li>
 	<li class="how">
 		<h3>How</h3>
-		<p>I believe that websites can be both visually engaging and highly functional ...</p>
+		<p><?= $this->truncate('I believe that websites can be both visually engaging and highly functional. This means writing valid and well structured (X)HTML, separating content from presentation with CSS, utilizing Object Oriented programming techniques to script interactivity, and interfacing with serverÐside technology and web services. This also means designing intuitive navigation schemes, emphasizing good typography, and tailoring content and copy for readability. Of course this also means keeping up wit current web technologies and design trends.', array('limit' => 25, 'url' => '/about')) ?></p>
 	</li>
 </ul>

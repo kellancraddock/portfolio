@@ -47,7 +47,8 @@
 			//Set arguments to Zend insert associative array
 			$insertArgs = array(
 				'title'        => $arguments[0],
-				'description'  => $arguments[1]
+				'description'  => $arguments[1],
+				'url'  		   => $arguments[2]
 				);
 		
 			//Insert into table 
@@ -67,7 +68,8 @@
 			$insertArgs = array(
 				'title'        => $update[0],
 				'description'  => $update[1],
-				'is_active'    => (int) $update[2],
+				'url'  		   => $update[2],
+				'is_active'    => (int) $update[3]
 				);
 				
 			$where[] = "id = '{$project_id[0]}'";

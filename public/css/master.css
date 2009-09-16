@@ -43,6 +43,10 @@ p {
 	line-height: 17px;
 }
 
+a {
+	color: #355b89;
+}
+
 h4 {
 	color: #b1c6db;
 	font-size: 24px;
@@ -90,13 +94,17 @@ h4.contact span {
 }
 
 .logo {
-	background: url(/images/logo.png) no-repeat;
-	text-indent: -999px;
-	width: 270px;
-	height: 138px;
 	float: left;
 	margin-left: -82px;
 	margin-bottom: -10px;
+}
+
+.logo a {
+	background: url(/images/logo.png) no-repeat;
+	display: block;
+	text-indent: -999px;
+	width: 270px;
+	height: 138px;
 }
 
 #main_container {

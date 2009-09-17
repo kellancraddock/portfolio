@@ -25,18 +25,22 @@ function Gallery() {
 	this.slideshow_next = function(fn) {
 		var margin = ($('.active', self.gallery).prevAll('li').length - self.off_set) * self.slide_width;
 		self.gallery.stop().animate({
-			marginLeft : '-' + margin + 'px',
-			duration: 2300
-		}, (fn) ? fn : function() {});
+			'marginLeft': '-' + margin + 'px'
+			}, {
+			'duration': 800,
+			'easing': 'easeInOutBack'
+			}, (fn) ? fn : function() {});
 		return $('.active', self.gallery).attr('id');
 	}
 	
 	this.slideshow_prev = function(fn) {
 		var margin = ($('.active', self.gallery).prevAll('li').length - self.off_set) * self.slide_width;
 		self.gallery.animate({
-			marginLeft : '-' + margin + 'px',
-			duration: 2300
-		}, (fn) ? fn : function() {});
+			'marginLeft': '-' + margin + 'px'
+			}, {
+			'duration': 800,
+			'easing': 'easeInOutBack'
+			}, (fn) ? fn : function() {});
 		return $('.active', self.gallery).attr('id');
 	}
 	
@@ -104,15 +108,17 @@ function Gallery() {
 		self.controls = $('.gallery_controls', '.controls_wrapper');
 		if (object.direction == 'down') {
 			self.controls.stop().animate({
-				bottom : '-' + total_height + 'px',
-				duration: 1000,
-				easing : 'easeOutbounce'
+				'bottom': '-' + total_height + 'px'
+				}, {
+				'duration': 500,
+				'easing': 'easeOutCubic'
 			});
 		} else if(object.direction == 'up') {
 			self.controls.stop().animate({
-				bottom : '-' + adjusted_height + 'px',
-				duration: 1000,
-				easing : 'easeOutbounce'
+				'bottom': '-' + adjusted_height + 'px'
+				}, {
+				'duration': 1000,
+				'easing': 'easeOutBounce'
 			});
 		} else if(object.direction == 'open') {
 			self.controls.stop().animate({

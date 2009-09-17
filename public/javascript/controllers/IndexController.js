@@ -31,12 +31,14 @@ function IndexController() {
 			self.controlsAction.auto();
 		});
 		
-		$('.left a', '.controls_wrapper').bind('click', function() {
+		$('.left a', '.controls_wrapper').bind('click', function(e) {
 			self.controlsAction.prev();
+			return false;
 		});
 		
-		$('.right a', '.controls_wrapper').bind('click', function() {
+		$('.right a', '.controls_wrapper').bind('click', function(e) {
 			self.controlsAction.next();
+			return false;
 		});
 	}
 	

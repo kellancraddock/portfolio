@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="/javascript/library/jquery-easing-1.3.js"></script>
 	
 	<script type="text/javascript" src="/javascript/helpers/Gallery.js"></script>
+	<script type="text/javascript" src="/javascript/helpers/ExternalLinks.js"></script>
 	
 	<script type="text/javascript" src="/javascript/views/BaseView.js"></script>
 	<script type="text/javascript" src="/javascript/views/View.js"></script>
@@ -22,6 +23,7 @@
 	<script type="text/javascript">
 		$(function() {
 			$('body').pngFix(); 
+			new ExternalLinks($('body'));
 		});
 	</script>
 </head>
@@ -50,19 +52,19 @@
 				</h4>
 				<ul class="nav contact clearfix">
 					<li>
-						<a class="button email external" href="#">Contact Me</a>
+						<a class="button email" href="/contact">Contact Me</a>
 					</li>
 					<li>
-						<a class="button facebook external" href="#">Facebook</a>
+						<a class="button facebook external" href="http://www.facebook.com/kellancraddock">Facebook</a>
 					</li>
 					<li>
-						<a class="button twitter external" href="#">Twitter</a>
+						<a class="button twitter external" href="http://twitter.com/kellan_craddock">Twitter</a>
 					</li>
 				</ul>
 			</div>
 			<div class="column one_third resume">
 				<h4>Resume</h4>
-				<a class="button pdf" href="#">Full PDF Resume</a>
+				<a class="button pdf external" href="/downloads/resume_web.pdf">Full PDF Resume</a>
 				<dl>
 					<dt>B.S. Web Design and Interactive Media</dt>
 					<dd><strong>October 2005 &ndash; September 2009</strong> Art Institute of Portland</dd>
@@ -70,9 +72,16 @@
 				
 			</div>
 		</div>
-		
+		<ul class="nav footer clearfix">
+			<li><a href="/index">Home</a></li>
+			<li><a href="/work">Work</a></li>
+			<li><a href="/about">About</a></li>
+			<li><a href="/contact">Contact</a></li>
+			<li><a href="/admin">Login</a></li>
+			<li>&copy;copyright 2009 Kellan Craddock, ALL RIGHTS RESERVED.</li>
+		</ul>
 	</div>
-	<div id="alert">Alert</div>
-	<div id="preloader"><p>Alert</p></div>
+	<div id="alert"></div>
+	<div id="preloader"><p>Preloader</p></div>
 </body>
 </html>

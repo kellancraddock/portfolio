@@ -14,7 +14,18 @@
 		<form action="/contact/mail" id="contact_form" method="post">
  			<fieldset class="clearfix">
  				<legend>Contact Me</legend>
- 				<p id="mail_status"><?= $this->mail_status['message'] ?></p>
+ 				<?php
+ 					if ($this->mail_status['status'] == 'success') {
+ 						echo "<h4>Thanks for the message, {$this->mail_status['name']}!</h4>";
+ 					} else {
+ 						echo "<h4>Whoops!</h4>";
+ 						echo "<ul class=\"normal errors\">";
+ 						foreach ($this->mail_status['message'] as $message) {
+ 							echo "<li>{$message}</li>";
+ 						}
+ 						echo "</ul>";
+ 					}
+ 				?>
  				<label>Name:</label>
  				<input type="text" name="name"/>
  				<label>Email:</label>

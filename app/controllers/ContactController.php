@@ -4,11 +4,12 @@
 		public function init()
 		{
 			$this->view->nav_contact = 'active';
+			$this->mail_session = new Zend_Session_Namespace('mail');
 		}
 		
 		public function indexAction()
 		{
-				
+			$this->view->mail_status = 	$this->mail_session->status;
 		}
 		
 		public function mailAction()
@@ -24,10 +25,10 @@
 			$errors = $message_helper->validate($postArray);
 
 			if ($errors) {
-				$this->view->mail_status = array('status' => 'fail', 'message' => $errors);	
+				$this->mail_session->status = array('status' => 'fail', 'message' => $errors);	
 			} else {
 				$message_helper->sendMessage($postArray);
-				$this->view->mail_status = array('status' => 'success', 'message' => 'Thanks for the message!');
+				$this->mail_session->status = array('status' => 'success', 'message' => 'Thanks for the message!', 'name' => $_POST['name']);
 			}
 				
 			header( "Location: /contact" );

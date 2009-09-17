@@ -375,6 +375,29 @@ h4.contact span {
 	background: url(/images/email.png) 4px center no-repeat;
 }
 
+/* !Button Launch */
+
+.button.launch {
+	color: #555;
+	background: #ededed url(/images/launch_btn_bg.gif) bottom repeat-x;
+	border: 1px solid #999;
+	padding: 10px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+.button.launch:hover {
+	border-color: #80aabd;
+	color: #555;
+	background: #afd3e2 url(/images/launch_btn_bg_over.gif) bottom repeat-x;
+}
+
+.button.launch span {
+	background: transparent url(/images/color_swatch.png) right center no-repeat;
+	display: block;
+	width: 100%;
+}
+
 /* !Navigation */
 
 .nav.main  {
@@ -423,15 +446,21 @@ h4.contact span {
 /* !Footer Navigation */
 
 .nav.footer {
-	-moz-border-radius-bottomright: 10px;
-	-moz-border-radius-bottomleft: 10px;
-	-webkit-border-bottom-right-radius: 10px;
-	-webkit-border-bottom-left-radius: 10px;
+	color: #222;
+	padding-left: 10px;
 }
 
 .nav.footer li {
 	float: left;
 	padding: 10px;
+}
+
+.nav.footer li a {
+	text-decoration: none;
+}
+
+.nav.footer li a:hover {
+	text-decoration: underline;
 }
 
 /* !Gallery Navigation */
@@ -457,8 +486,16 @@ h4.contact span {
 	background: transparent url(/images/controls_left.png) center center no-repeat;
 }
 
+.nav.gallery li.left a:hover, #thumbs span.left a:hover {
+	background: transparent url(/images/controls_left_over.png) center center no-repeat;
+}
+
 .nav.gallery li.right a, #thumbs span.right a {
 	background: transparent url(/images/controls_right.png) center center no-repeat;
+}
+
+.nav.gallery li.right a:hover, #thumbs span.right a:hover {
+	background: transparent url(/images/controls_right_over.png) center center no-repeat;
 }
 
 .nav.gallery li.launch_btn a {
@@ -494,7 +531,7 @@ h4.contact span {
 	left: 0;
 }
 
-#thumbs span.left a {
+#thumbs span.left a, #thumbs span.left a:hover {
 	background-position: 30% 50%;
 }
 
@@ -502,7 +539,7 @@ h4.contact span {
 	right: 0;
 }
 
-#thumbs span.right a {
+#thumbs span.right a, #thumbs span.right a:hover {
 	background-position: 70% 50%;
 }
 
@@ -552,6 +589,10 @@ h4.contact span {
 	bottom: -100px;
 }
 
+.gallery_controls.main p {
+	margin-top: 0;
+}
+
 .gallery_controls.main h2, .gallery_controls.main p {
 	background: url(/images/transparent_dark.png);
 	color: #ccc;
@@ -559,11 +600,11 @@ h4.contact span {
 }
 
 .gallery_controls.main h2 {
-	background: transparent url(/images/paper_icon.png)10px 8px no-repeat;
+	background: transparent url(/images/project_icon.png) 10px 100% no-repeat;
 	color: #B1C6DB;
 	font-size: 16px;
-	padding-left: 40px;
-	padding-bottom: 0;
+	padding-left: 55px;
+	padding-bottom: 10px;
 }
 
 /* !clearfix */
@@ -646,7 +687,7 @@ legend {
 	padding-right: 10px;
 }
 
-input[type="text"], input[type="file"], textarea, select {
+input[type="text"], input[type="file"], input[type="password"], textarea, select {
 	background: transparent url(/images/input_bg.png) 0 -20px repeat-x;
 	border: 1px solid #ccc;
 	display: block;
@@ -679,6 +720,16 @@ button {
 
 .contact button {
 	float: right;
+}
+
+.contact em {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.contact ul.normal.errors {
+	color: red;
+	margin-bottom: 10px;
 }
 
 /* !Image Forms */

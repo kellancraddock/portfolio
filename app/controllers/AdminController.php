@@ -7,6 +7,7 @@
 		public function init()
 		{
 			$this->_helper->layout->setLayout('admin');
+			$this->admin_session = new Zend_Session_Namespace('admin');
 		}
 		
 		public function indexAction()
@@ -14,14 +15,37 @@
 				
 		}
 		
+		public function loginAction()
+		{
+			$user_name = "root";
+			$password = "root";
+			if ($_POST['user_name'] == $user_name && $_POST['password'] == $password) {
+				$this->admin_session->user = $user_name;
+				header("Location: /admin/projects");	
+			} else {
+				header("Location: /");
+			}
+		}
+		
+		public function logoutAction()
+		{
+				
+		}
+		
 		public function projectsAction()
 		{
+			if (!isset($this->admin_session->user)) {
+				header("Location: /");
+			}
 			$project_model = new ProjectModel();
 			$this->view->projects = $project_model->getAll();
 		}
 		
 		public function newAction()
 		{
+			if (!isset($this->admin_session->user)) {
+				header("Location: /");
+			}
 			$project_model = new ProjectModel();
 			$contributions_model = new ContributionModel();
 			$image_model = new ImageModel();
@@ -45,6 +69,9 @@
 		
 		public function deleteAction()
 		{
+			if (!isset($this->admin_session->user)) {
+				header("Location: /");
+			}
 			$project_model = new ProjectModel();
 			$contributions_model = new ContributionModel();
 			$image_model = new ImageModel();
@@ -70,6 +97,9 @@
 		
 		public function editAction()
 		{
+			if (!isset($this->admin_session->user)) {
+				header("Location: /");
+			}
 			$image_model = new ImageModel();
 			$project_model = new ProjectModel();
 			$contributions_model = new ContributionModel();
@@ -90,6 +120,9 @@
 		
 		public function updateAction()
 		{
+			if (!isset($this->admin_session->user)) {
+				header("Location: /");
+			}
 			$project_model = new ProjectModel();
 			$contributions_model = new ContributionModel();
 			

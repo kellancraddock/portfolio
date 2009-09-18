@@ -44,6 +44,7 @@
 			}
 			
 			$this->project = $project_model->getOne($project_id);
+			$this->project['description'] = stripslashes($this->project['description']);
 			$this->project['contributions'] = $contribution_model->getOne($project_id);
 			$this->project['images'] = $image_model->getAll($project_id);
 			//If the view is set, loop through the images and find the file_name that matches

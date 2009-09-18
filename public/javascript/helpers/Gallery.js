@@ -22,35 +22,37 @@ function Gallery() {
 		}
 	}
 	
-	this.slideshow_next = function(fn) {
+	this.slideshow_next = function(obj) {
+		var easing = (easing) ? easing : 'jswing';
 		var margin = ($('.active', self.gallery).prevAll('li').length - self.off_set) * self.slide_width;
 		self.gallery.stop().animate({
 			'marginLeft': '-' + margin + 'px'
 			}, {
 			'duration': 800,
-			'easing': 'easeInOutBack'
-			}, (fn) ? fn : function() {});
+			'easing': (obj.easing) ? obj.easing : 'jswing'
+			}, (obj.callback) ? obj : function() {});
 		return $('.active', self.gallery).attr('id');
 	}
 	
-	this.slideshow_prev = function(fn) {
+	this.slideshow_prev = function(obj) {
+		var easing = (easing) ? easing : 'jswing';
 		var margin = ($('.active', self.gallery).prevAll('li').length - self.off_set) * self.slide_width;
 		self.gallery.animate({
 			'marginLeft': '-' + margin + 'px'
 			}, {
 			'duration': 800,
-			'easing': 'easeInOutBack'
-			}, (fn) ? fn : function() {});
+			'easing': (obj.easing) ? obj.easing : 'jswing'
+			}, (obj.callback) ? obj.callback : function() {});
 		return $('.active', self.gallery).attr('id');
 	}
 	
-	this.slideshow_center = function(active, fn) {
-		self.slideshow_resetactive(active);
+	this.slideshow_center = function(obj) {
+		self.slideshow_resetactive(obj.active);
 		//Check to see which side of the active has more items them move
 		if ($('.active', self.gallery).prev('li').length > $('.active', self.gallery).next('li').length) {
-			return self.slideshow_next((fn) ? fn : function() {});
+			return self.slideshow_next(obj);
 		} else {
-			return self.slideshow_prev((fn) ? fn : function() {});
+			return self.slideshow_prev(obj);
 		}
 	}
 	
@@ -82,7 +84,11 @@ function Gallery() {
 	
 	this.project_update = function(response) {
 		$('li.title h3', self.callouts).html(response['title']);
-		$('li.title a', self.callouts).attr('href', 'http://' + response['url']);
+		$('li.title a', self.callouts).remove();
+		if (!response['url'] == '') {
+			$('li.title', self.callouts).append('<a class="button launch external" href="http://' + response['url'] +'"><span>Launch Project</span></a>');
+		}
+		
 		$('li.about p', self.callouts).html(response['description']);
 		var contributions = '';
 		$.each(response['contributions'], function(key, value) {

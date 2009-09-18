@@ -66,7 +66,7 @@ function IndexController() {
 					setTimeout(function() {
 						if ($('.active', self.gallery).next('li').length) {
 							self.view.main_gallery.slideshow_resetactive($('.active', self.gallery).next('li'));
-							var new_project = self.view.main_gallery.slideshow_next();
+							var new_project = self.view.main_gallery.slideshow_next({});
 						}
 						(new_project) ? self.updateInfoAction.auto(new_project) : self.updateInfoAction.auto(self.view.main_gallery.slideshow_reset());
 					}, 600);
@@ -75,14 +75,14 @@ function IndexController() {
 		next: function() {
 				if ($('.active', self.gallery).next('li').length) {
 					self.view.main_gallery.slideshow_resetactive($('.active', self.gallery).next('li'));
-					var new_project = self.view.main_gallery.slideshow_next();
+					var new_project = self.view.main_gallery.slideshow_next({});
 				}
 				(new_project) ? self.updateInfoAction.manual(new_project) : self.updateInfoAction.manual(self.view.main_gallery.slideshow_reset());
 			},
 		prev: function() {
 				if ($('.active', self.gallery).prev('li').length) {
 					self.view.main_gallery.slideshow_resetactive($('.active', self.gallery).prev('li'));
-					var new_project = self.view.main_gallery.slideshow_prev();
+					var new_project = self.view.main_gallery.slideshow_prev({});
 				}
 				(new_project) ? self.updateInfoAction.manual(new_project) : self.updateInfoAction.manual(self.view.main_gallery.slideshow_reset());
 			},

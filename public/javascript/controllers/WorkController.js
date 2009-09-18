@@ -61,7 +61,10 @@ function WorkController() {
 			self.view.preloader.start('Loading project');
 			
 			var id = $(this).attr('id');
-			var new_project = self.view.thumbs_gallery.slideshow_center(this);
+			var new_project = self.view.thumbs_gallery.slideshow_center({
+				active : this,
+				easing : 'easeInOutBack'
+				});
 			var direction = self.view.work_gallery.slideshow_center(this, id);
 			self.updateInfoAction.manual(new_project, function(response) {
 				self.view.thumbs_gallery.project_update(response);
@@ -69,17 +72,23 @@ function WorkController() {
 				self.view.work_gallery.slideshow_load(direction, id);
 				self.view.work_gallery.slideshow_setwidth();
 				if(direction == 'next') {
-					self.view.work_gallery.slideshow_next(function() {
-						self.view.work_gallery.slideshow_setwidth();
-						self.view.work_gallery.slideshow_unload();
-						$(self.gallery).css({'marginLeft': 0});
-						self.view.work_gallery.slideshow_setwidth();
+					self.view.work_gallery.slideshow_next({
+						callback : function() {
+								self.view.work_gallery.slideshow_setwidth();
+								self.view.work_gallery.slideshow_unload();
+								$(self.gallery).css({'marginLeft': 0});
+								self.view.work_gallery.slideshow_setwidth();
+							},
+						easing : 'jswing',
 					});
 				} else {
-					self.view.work_gallery.slideshow_prev(function() {
-						self.view.work_gallery.slideshow_setwidth();
-						self.view.work_gallery.slideshow_unload();
-						self.view.work_gallery.slideshow_setwidth();
+					self.view.work_gallery.slideshow_prev({
+						callback : function() {
+									self.view.work_gallery.slideshow_setwidth();
+									self.view.work_gallery.slideshow_unload();
+									self.view.work_gallery.slideshow_setwidth();
+								},
+						easing : 'jswing',
 					});
 				}
 			});
@@ -108,7 +117,10 @@ function WorkController() {
 			var id = $(this).attr('title');
 			id = '[id=' + id + ']';
 			self.view.views_gallery.slideshow_resetactive($(id, self.gallery));
-			self.view.views_gallery.slideshow_center($('.active', self.gallery));
+			self.view.views_gallery.slideshow_center({
+				active : $('.active', self.gallery),
+				easing : 'easeOutExpo'
+			});
 			$(this).siblings('li').removeClass('active');
 			$(this).addClass('active');
 		});
@@ -134,7 +146,9 @@ function WorkController() {
 		next: function() {
 				if ($('.active', self.thumbs).next('li').length) {
 					self.view.thumbs_gallery.slideshow_resetactive($('.active', self.thumbs).next('li'));
-					var new_project = self.view.thumbs_gallery.slideshow_next();
+					var new_project = self.view.thumbs_gallery.slideshow_next({
+						easing : 'easeInOutBack'
+					});
 				}
 				self.updateInfoAction.manual(new_project, function(response) {
 					self.view.thumbs_gallery.project_update(response);
@@ -143,17 +157,22 @@ function WorkController() {
 					self.view.work_gallery.slideshow_load('next', id);
 					self.view.work_gallery.slideshow_setwidth();
 					
-					self.view.work_gallery.slideshow_next(function() {
-						self.view.work_gallery.slideshow_unload();
-						$(self.gallery).css({'marginLeft': 0});
-						self.view.work_gallery.slideshow_setwidth();
+					self.view.work_gallery.slideshow_next({
+						callback : function() {
+								self.view.work_gallery.slideshow_unload();
+								$(self.gallery).css({'marginLeft': 0});
+								self.view.work_gallery.slideshow_setwidth();
+							},
+						easing : 'easeOutExpo'
 					});
 				});
 			},
 		prev: function() {
 				if ($('.active', self.thumbs).prev('li').length) {
 					self.view.thumbs_gallery.slideshow_resetactive($('.active', self.thumbs).prev('li'));
-					var new_project = self.view.thumbs_gallery.slideshow_prev();
+					var new_project = self.view.thumbs_gallery.slideshow_prev({
+						easing : 'easeInOutBack'
+					});
 				}
 				self.updateInfoAction.manual(new_project, function(response) {
 					self.view.thumbs_gallery.project_update(response);
@@ -162,13 +181,16 @@ function WorkController() {
 					self.view.work_gallery.slideshow_load('prev', id);
 					self.view.work_gallery.slideshow_setwidth();
 					
-					self.view.work_gallery.slideshow_prev(function() {
-						self.view.work_gallery.slideshow_setwidth();
-						self.view.work_gallery.slideshow_unload();
-						self.view.work_gallery.slideshow_setwidth();
+					self.view.work_gallery.slideshow_prev({
+						callback : function() {
+									self.view.work_gallery.slideshow_setwidth();
+									self.view.work_gallery.slideshow_unload();
+									self.view.work_gallery.slideshow_setwidth();
+								},
+						easing : 'easeOutExpo'
 					});
 				});
-			}
+			}	
 	}
 	
 	this.updateInfoAction = {

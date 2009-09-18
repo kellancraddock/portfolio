@@ -36,14 +36,14 @@ function View() {
 		}
 	}
 	
-	this.work_gallery.slideshow_prev = function(fn) {
+	this.work_gallery.slideshow_prev = function(obj) {
 		var margin = ($('.inactive:first', this.gallery).prevAll('li').length - this.off_set) * this.slide_width;
 		this.gallery.css({
 			"marginLeft": '-' + margin + 'px'
 		}).animate({
 			marginLeft : 0,
-			duration: 2300
-		}, (fn) ? fn : function() {});
+			duration: (obj.easing) ? obj.easing : 'jswing',
+		}, (obj.callback) ? obj.callback : function() {});
 		return $('.active', self.gallery).attr('id');
 	}
 	

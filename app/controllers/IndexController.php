@@ -17,6 +17,7 @@
 			$project_id = $active_projects[array_rand($active_projects)]['id'];
 			
 			$this->project = $this->project_model->getOne($project_id);
+			$this->project['description'] = stripslashes($this->project['description']);
 			$this->project['image'] = $this->image_model->getPrimary($project_id);
 			
 			$this->view->project = $this->project;
@@ -47,6 +48,7 @@
 				header("Location: /");
 			}
 			$this->project = $this->project_model->getOne($_POST['id']);
+			$this->project['description'] = stripslashes($this->project['description']);
 			$this->_helper->json($this->project);
 		}
 		

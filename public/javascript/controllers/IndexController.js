@@ -67,6 +67,7 @@ function IndexController() {
 						if ($('.active', self.gallery).next('li').length) {
 							self.view.main_gallery.slideshow_resetactive($('.active', self.gallery).next('li'));
 							var new_project = self.view.main_gallery.slideshow_next({});
+							new_project = new_project.replace('main_', '');
 						}
 						(new_project) ? self.updateInfoAction.auto(new_project) : self.updateInfoAction.auto(self.view.main_gallery.slideshow_reset());
 					}, 600);
@@ -76,6 +77,7 @@ function IndexController() {
 				if ($('.active', self.gallery).next('li').length) {
 					self.view.main_gallery.slideshow_resetactive($('.active', self.gallery).next('li'));
 					var new_project = self.view.main_gallery.slideshow_next({});
+					new_project = new_project.replace('main_', '');
 				}
 				(new_project) ? self.updateInfoAction.manual(new_project) : self.updateInfoAction.manual(self.view.main_gallery.slideshow_reset());
 			},
@@ -83,6 +85,7 @@ function IndexController() {
 				if ($('.active', self.gallery).prev('li').length) {
 					self.view.main_gallery.slideshow_resetactive($('.active', self.gallery).prev('li'));
 					var new_project = self.view.main_gallery.slideshow_prev({});
+					new_project = new_project.replace('main_', '');
 				}
 				(new_project) ? self.updateInfoAction.manual(new_project) : self.updateInfoAction.manual(self.view.main_gallery.slideshow_reset());
 			},

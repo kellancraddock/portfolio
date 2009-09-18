@@ -11,7 +11,7 @@ function Gallery() {
 	this.slideshow_load = function(images) {
 		try {
 			$(images).each(function(i) {
-				self.gallery.append('<li id="' + images[i]['project_id'] + '"><img src="/uploads/' + images[i]['file_name'] + '" /></li>')
+				self.gallery.append('<li id="main_' + images[i]['project_id'] + '"><img src="/uploads/' + images[i]['file_name'] + '" /></li>')
 			});
 	
 			self.slideshow_setwidth();
@@ -73,7 +73,7 @@ function Gallery() {
 		self.gallery.animate({
 			marginLeft : '0px'
 		});
-		return $('.active', self.gallery).attr('id');
+		return $('.active', self.gallery).attr('id').replace('main_', '');
 	}
 	
 	this.controls_update = function(response) {

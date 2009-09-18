@@ -51,7 +51,7 @@
 	<ul class="thumbs clearfix">
 	<?php
 		foreach ($this->thumbs as $key => $thumb) {
-			echo ($thumb['project_id'] == $this->project['id']) ? "<li id=\"{$thumb['project_id']}\" class=\"active\" >" : "<li id=\"{$thumb['project_id']}\" >";
+			echo ($thumb['project_id'] == $this->project['id']) ? "<li id=\"thumb_{$thumb['project_id']}\" class=\"active\" >" : "<li id=\"thumb_{$thumb['project_id']}\" >";
 			echo "<a href=\"/work/project/id/{$thumb['project_id']}\">";
 			if (isset($thumb['file_name'])) {
 				echo "<img src=\"/uploads/{$thumb['file_name']}\" alt=\"thumbnail\" />";

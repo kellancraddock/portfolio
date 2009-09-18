@@ -8,7 +8,8 @@
 <ul class="callouts contact clearfix">
 	<li class="one_third contact">
 		<h3>Contact</h3>
-		<p>Hello! My name is Kellan Craddock and innovative interactive design gets me excited!</p><p>As an Interactive designer from Portland Oregon, I continually strive to blend engaging graphics with cutting edge programming techniques to create rich and informative user experiences.</p>
+		<p>Have some questions? Let&lsquo;s talk!</p>
+		<p>If it&lsquo;s for work, fun, or just to say &ldquo;hi!&rdquo; Feel free to leave me a message and I&lsquo;ll get back to you promptly!</p>
 	</li>
 	<li class="two_thirds">
 		<form action="/contact/mail" id="contact_form" method="post">
@@ -17,7 +18,7 @@
  				<?php
  					if ($this->mail_status['status'] == 'success') {
  						echo "<h4>Thanks for the message, {$this->mail_status['name']}!</h4>";
- 					} else {
+ 					} elseif(isset($this->mail_status['message'])) {
  						echo "<h4>Whoops!</h4>";
  						echo "<ul class=\"normal errors\">";
  						foreach ($this->mail_status['message'] as $message) {

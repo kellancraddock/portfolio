@@ -12,7 +12,9 @@
 		
 		public function indexAction()
 		{
-				
+			if (isset($this->admin_session->user)) {
+				header("Location: /admin/projects");
+			}
 		}
 		
 		public function loginAction()
@@ -107,6 +109,7 @@
 			$project_id = $this->_request->getParam('id');
 			
 			$this->project = $project_model->getOne($project_id);
+			$this->project['description'] = stripslashes($this->project['description']);
 			$this->project['images'] = $image_model->getAll($project_id);
 			$contributions = '';
 			foreach ($contributions_model->getOne($project_id) as $contribution) {
